@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/styles.css"/>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>Destination Unknown</title>
 </head>
+
 <body>
-    <div>
-        <h1 class="text-5xl italic font-bold text-indigo-800">Destination Unknown</h1>
-    </div>
     <!-- component -->
-<header>
-<div class="w-full bg-cover bg-center" style="height:20rem; background-image: url(./assets/images/header-img.jpg);">
-        <div class="flex items-center justify-start h-full w-full bg-gray-900 bg-opacity-50">
-            <div class="flex justify-start">
-                <h1 class="text-white text-2xl font-semibold uppercase md:text-3xl">When you just want to get away!</h1>
+    <header>
+        <div class="w-full bg-cover bg-center"
+            style="height:20rem; background-image: url(./assets/images/header-img2.jpg);">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="flex justify-around grid grid-rows-2 grid-flow-col gap-4">
+                    <h1 class="text-3xl italic font-bold text-blue-900 col-start-1 md:text-5xl ">
+                        Destination Unknown</h1>
+                        <div>
+                    <h2 class="text-blue-900 font-bold text-2xl col-start-1 font-semibold italic md:text-5xl">
+                        When you just want to get away!</h2>
+                        </div>
+                        </div>
+
+                    <div class="grid grid-rows-1 grid-flow-col gap-4 justify-end">
+                        <div class="row-start-1 row-end-4">
+
+                        <p class="pr-10 text-1xl italic font-bold text-white bg-blue-800 pr-6 md:text-3xl">Local Time: <span
+                                id="datetime"></span></p>
+                        </div>
+                    </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
+
+
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
