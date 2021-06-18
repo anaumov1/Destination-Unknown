@@ -1,9 +1,13 @@
-// get a new date (locale machine date time)
-var date = new Date();
-// get the date as a string
-var n = date.toDateString();
-// get the time as a string
-var time = date.toLocaleTimeString();
+var clockElement = document.getElementById("clock");
+
+function clock() {
+    clockElement.textContent = new Date().toString();
+}
+
+setInterval(clock, 1000);
+
+// dinamycly appned search rresults to searchResultsBox
+    var searchResultsBox = document.querySelector("#search-results-box");
 
 // find the html element with the id of time
 // set the innerHTML of that element to the date a space the time
