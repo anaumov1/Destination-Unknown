@@ -27,6 +27,10 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 
 travelBriefUrl = "https://travelbriefing.org/Netherlands?format=json"
 
-fetch(travelBriefUrl){
-    
-}
+fetch(travelBriefUrl)
+.then(function(response){
+    return response.json();
+})
+.then(function(data){
+    console.log(data);
+})
