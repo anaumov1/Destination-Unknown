@@ -11,7 +11,7 @@ setInterval(clock, 1000);
 
 // find the html element with the id of time
 // set the innerHTML of that element to the date a space the time
-document.getElementById('datetime').innerHTML = n + ' ' + time;
+//document.getElementById('datetime').innerHTML = n + ' ' + time;
 
 
 
@@ -37,17 +37,28 @@ document.getElementById('datetime').innerHTML = n + ' ' + time;
  var marketCountry = "US";
  var limitedQuotes = [];
  var Places = [];
- var destinationId = [];
+ var destinationId;
+ var destinationId;
  var originId;
  var carrierId;
+ var carrierIdIn;
  var carriers;
  var quotes;
  var price;
  var dateOfDeparture;
- var travelDestination;
- var travelCountry;
- var departurePoint;
- var departureCountry;
+ var travelDestinationOut;
+ var travelCountryOut;
+ var departurePointOut;
+ var departureCountryOut;
+ var dayOfReturn;
+ var airlineNameOut;
+ var airlineNameIn;
+
+
+ var pricing = document.querySelector("#pricing");
+ var dates = document.querySelector("#dates");
+ var destination = document.querySelector("#destination");
+ var airlines = document.querySelector("#airlines")
 
 fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/"+marketCountry+"/"+ currency + "/" + resultsLocale +"/" + pointOfOrigin + "/" + destinationPlace + "/"+ departureDate + "/" + returnDate ,{
 	"method": "GET",
@@ -81,67 +92,139 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
     for (var i = 0; i< quotes.length; i++){
         if(quotes[i].Direct === true){
             limitedQuotes.push(quotes[i]);
-            console.log(limitedQuotes);
-            
+            console.log(limitedQuotes); 
         }              
     }
-    
-    //iterate through all the quotes to pull the price, departure date and origin, country of arrival and return date
-    for (var q = 0; q < limitedQuotes.length; q ++){
-
-        //price[q]
-        price = limitedQuotes[q].MinPrice
-        console.log(price + " min price ");
-
-        //carrierId[q]
-        carrierId = limitedQuotes[q].OutboundLeg.CarrierIds[0];
-        console.log(carrierId + ": carrier id ")
-
-        //match carrier id from limitedQuote with carrier name from carriers
-        for( var n = 0; n < carriers.length; n++){
-            if(carrierId === carriers[n].CarrierId ){
-                console.log(carriers[n].Name + " Carrier Name " )
-            }
-        }
-
-        //dateOfDeparture[q]
-        dateOfDeparture = limitedQuotes[q].OutboundLeg.DepartureDate
-        console.log( dateOfDeparture + ": Departure Date ");
-
-        //destination id
-        destinationId= limitedQuotes[q].OutboundLeg.DestinationId;
-        console.log(destinationId + ": Destination ID ");
-
-        //origin id
-        originId = limitedQuotes[q].OutboundLeg.OriginId
-        console.log(originId +  ": Origin ID ");
-
-
-        //convert destination id and origin id into names
-        for(var c = 0; c < places.length; c++){
-            if(destinationId === places[c].PlaceId){
-                travelDestination = places[c].Name; 
-                console.log(travelDestination+ ": Location of Travel ")
-                travelCountry = places[c].CountryName;
-                console.log(travelCountry + ": Country of Travel");
-            }
-
-            //compare quoted origin id to PlaceId to find a match
-            if(originId === places[c].PlaceId){
-                departurePoint = places[c].Name;
-                console.log(  departurePoint + " Place of Departure")
-                departureCountry = places[c].CountryName;
-                console.log(departureCountry + " Country of Departure")
-            }
-        }      
-    } 
-
+        
+    pricingInformation();
+    tripDates();
+    tripLocation();
+    flightCarriers();
 
 })
 .catch(function(err){
     console.error(err);
 })
 
+
+var tripDates = function(){
+   for(var d = 0; d<limitedQuotes.length; d ++){ 
+   //dateOfDeparture[q]
+    dateOfDeparture = limitedQuotes[d].OutboundLeg.DepartureDate
+    console.log( dateOfDeparture + ": Departure Date ");
+    //dateOfReturn[q]
+    dateOfReturn = limitedQuotes[d].InboundLeg.DepartureDate
+    console.log( dateOfReturn + ": Return Date ");
+
+    var dateli = document.createElement("li");
+    dates.append(dateli);
+    dateli.innerHTML = "Departure: " + dateOfDeparture + "/ Return: " + dateOfReturn;
+   }
+}
+
+var tripLocation = function(){
+    for(var l = 0; l<limitedQuotes.length; l++){
+        //outbound flights
+
+        //destination id outbound
+        destinationId= limitedQuotes[l].OutboundLeg.DestinationId;
+        console.log(destinationId + ": Destination ID ");
+ 
+        //origin id outbound
+        originId = limitedQuotes[l].OutboundLeg.OriginId
+        console.log(originId +  ": Origin ID ");
+
+ 
+        //convert destination id and origin id into names
+        for(var c = 0; c < places.length; c++){
+            if(destinationId === places[c].PlaceId){
+                travelDestinationOut = places[c].Name; 
+                console.log(travelDestinationOut+ ": Location of Travel ")
+                travelCountryOut = places[c].CountryName;
+                console.log(travelCountryOut + ": Country of Travel");
+            }
+ 
+            //compare quoted origin id to PlaceId to find a match
+            if(originId === places[c].PlaceId){
+                departurePointOut = places[c].Name;
+                console.log(  departurePointOut + " Place of Departure")
+                departureCountryOut = places[c].CountryName;
+                console.log(departureCountryOut + " Country of Departure")
+            }
+        } 
+        var destinationli = document.createElement("li");
+        destination.append(destinationli);
+        destinationli.innerHTML = "From: " + departurePointOut+" / "+ departureCountryOut + "/ To: " + travelDestinationOut + " / " + travelCountryOut;
+        
+
+        // //inbound flights
+        // destinationId= limitedQuotes[q].InboundLeg.DestinationId;
+        // console.log(destinationId + ": Destination ID ");
+
+        // //origin id
+        // originId = limitedQuotes[q].InboundLeg.OriginId
+        // console.log(originId +  ": Origin ID ");
+    
+    
+        // //convert destination id and origin id into names
+        // for(var c = 0; c < places.length; c++){
+        //     if(destinationId === places[c].PlaceId){
+        //         travelDestination = places[c].Name; 
+        //         console.log(travelDestination+ ": Location of Travel ")
+        //         travelCountry = places[c].CountryName;
+        //         console.log(travelCountry + ": Country of Travel");
+        //     }
+    
+        //     //compare quoted origin id to PlaceId to find a match
+        //     if(originId === places[c].PlaceId){
+        //         departurePoint = places[c].Name;
+        //         console.log(  departurePoint + " Place of Departure")
+        //         departureCountry = places[c].CountryName;
+        //         console.log(departureCountry + " Country of Departure")
+        //     }
+        // }   
+    }
+}
+
+var flightCarriers = function(){
+    for(var a = 0; a<limitedQuotes.length; a ++){
+        //carrierId(Outbound)
+        carrierId = limitedQuotes[a].OutboundLeg.CarrierIds[0];
+        console.log(carrierId + ": carrier id ")
+
+        //carrierId(Inbound)
+        carrierIdIn = limitedQuotes[a].InboundLeg.CarrierIds[0];
+        console.log(carrierIdIn + ": carrier id ")
+    
+        //match carrier id from limitedQuote with carrier name from carriers
+        for( var n = 0; n < carriers.length; n++){
+            if(carrierId === carriers[n].CarrierId ){
+                airlineNameOut = carriers[n].Name 
+                console.log(airlineNameOut + " Carrier Name " )
+                var airlinesli = document.createElement("li");
+                airlines.append(airlinesli);
+                airlinesli.innerHTML = airlineNameOut
+            }
+            if(carrierIdIn === carriers[n].CarrierId ){
+                airlineNameIn = carriers[n].Name
+                console.log(airlineNameIn + " Carrier Name " )
+                airlinesli.append(" /" + airlineNameIn);
+                
+            }
+        }       
+    }
+}
+
+var pricingInformation = function(){
+    for(var q = 0; q<limitedQuotes.length; q++){
+        //price[q]
+        price = limitedQuotes[q].MinPrice
+        console.log(price + " min price ");
+        var priceli = document.createElement("li")
+        pricing.append(priceli);
+        priceli.innerHTML = "$ "+ price;
+    }
+}
 
 
 
