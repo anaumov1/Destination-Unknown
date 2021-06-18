@@ -10,24 +10,7 @@ var time = date.toLocaleTimeString();
 document.getElementById('datetime').innerHTML = n + ' ' + time;
 
 
-// //fetch supported countries
-// fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/countries/en-US", {
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-key": "9f26d8ac82msh2648fcef3be4079p1494e7jsn9b0c1ca6e817",
-// 		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
-// 	}
-// })
-// .then(function(countries){
-//     return countries.json();
-// })
-// .then(function(countries){
-//     console.log(countries);
-//     return countries
-// })
-// .catch(function(err){
-// 	console.error(err);
-// });
+
 
 
 
@@ -101,12 +84,12 @@ fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices
 
 
 
-// travelBriefUrl = "https://travelbriefing.org/Netherlands?format=json"
+travelBriefUrl = "https://travelbriefing.org/Netherlands?format=json"
 
-// fetch(travelBriefUrl)
-// .then(function(response){
-//     return response.json();
-// })
-// .then(function(data){
-//     console.log(data);
-// })
+fetch(travelBriefUrl)
+.then(function(response){
+    return response.json();
+})
+.then(function(data){
+    console.log(data);
+})
