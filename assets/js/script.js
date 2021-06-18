@@ -1,13 +1,17 @@
-// get a new date (locale machine date time)
-var date = new Date();
-// get the date as a string
-var n = date.toDateString();
-// get the time as a string
-var time = date.toLocaleTimeString();
+var clockElement = document.getElementById("clock");
+
+function clock() {
+    clockElement.textContent = new Date().toString();
+}
+
+setInterval(clock, 1000);
+
+// dinamycly appned search rresults to searchResultsBox
+    var searchResultsBox = document.querySelector("#search-results-box");
 
 // find the html element with the id of time
 // set the innerHTML of that element to the date a space the time
-document.getElementById('datetime').innerHTML = n + ' ' + time;
+// document.getElementById('datetime').innerHTML = n + ' ' + time;
 // const url = 'https://api.giphy.com/v1/gifs/random?api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN'
 // fetch(url).then(function(response){
 //     return response.json()})
