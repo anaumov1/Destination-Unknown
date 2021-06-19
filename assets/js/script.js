@@ -245,17 +245,21 @@ var countryChoice = function(event){
 
 
 //travelBriefUrl = "https://travelbriefing.org/Netherlands?format=json"
+country="China"
 
 var travelAPI = "https://travelbriefing.org/" + country +"?format=json";
 
-$.ajax({
-    url:travelAPI,
-    method: "GET"
+fetch(travelAPI)
+.then(function (response) {
+    if (!response || !response.ok) {
+        status = true;
+        throw new Error('Opps! No response');
+    };
+    return response.json();
 })
 .then(function(responseStr) {
 
     // Turn response string to object
-    var response = JSON.parse(responseStr)
-    console.log(response)
+    console.log(responseStr)
 
 });
