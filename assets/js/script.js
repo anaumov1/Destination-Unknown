@@ -28,7 +28,7 @@ setInterval(clock, 1000);
 //locale:en-US
 //originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
 
- var departureDate = "2021-06-18";
+ var departureDate = "2021-06-19";
  var returnDate = "2021-06-25";
  var destinationPlace = "anywhere";
  var pointOfOrigin =  "DFWA-sky";
@@ -195,23 +195,21 @@ var flightCarriers = function(){
         //carrierId(Inbound)
         carrierIdIn = limitedQuotes[a].InboundLeg.CarrierIds[0];
         console.log(carrierIdIn + ": carrier id ")
-    
-        //match carrier id from limitedQuote with carrier name from carriers
-        for( var n = 0; n < carriers.length; n++){
-            if(carrierId === carriers[n].CarrierId ){
-                airlineNameOut = carriers[n].Name 
-                console.log(airlineNameOut + " Carrier Name " )
-                var airlinesli = document.createElement("li");
-                airlines.append(airlinesli);
-                airlinesli.innerHTML = airlineNameOut
-            }
-            if(carrierIdIn === carriers[n].CarrierId ){
-                airlineNameIn = carriers[n].Name
-                console.log(airlineNameIn + " Carrier Name " )
-                airlinesli.append(" /" + airlineNameIn);
-                
-            }
-        }       
+
+        if(carrierIdIn === carrierId){
+            for( var n = 0; n < carriers.length; n++){
+                if(carrierId === carriers[n].CarrierId ){
+                    airlineNameOut = carriers[n].Name 
+                    console.log(airlineNameOut + " Carrier Name " )
+                    var airlinesli = document.createElement("li");
+                    airlines.append(airlinesli);
+                    airlinesli.innerHTML = airlineNameOut
+                }              
+            }     
+        }
+        else{
+            console.log("different carriers")
+        }        
     }
 }
 
