@@ -273,7 +273,7 @@ function fetchTravelApi() {
         });
         travelAPI_2(countryOfTravel)
 }
-//api to get the country capital calling codes , flags etc
+//api to get the country flags etc
 function travelAPI_2(countryOfTravel)
 {
  var travelApi2 = 'https://restcountries.eu/rest/v2/name/'+countryOfTravel;
@@ -285,7 +285,7 @@ function travelAPI_2(countryOfTravel)
      return response.json();
  })
  .then(function (responseStr) {
-
+    //display flag
     console.log(responseStr[0].flag);
     // will use this to display the flag
    /* var flag= document.getElementById("flag");
