@@ -231,34 +231,31 @@ var countryChoice = function(event){
     console.log(btnTarget)
     // console.log(CountryOut[btnTarget])
     countryOfTravel = CountryOut[btnTarget]
-    
+    fetchTravelApi();
+
 }
-
-
-//console.log(CountryOut);
-
 
 //Fizza this is the variable you can use for your api. I'm just struggling to pull it out of countryChoice function
 
-//console.log(countryOfTravel);
 
 
 
 //travelBriefUrl = "https://travelbriefing.org/Netherlands?format=json"
-country="China"
 
-var travelAPI = "https://travelbriefing.org/" + country +"?format=json";
+function fetchTravelApi()
+{ country=countryChoice;
+    var travelAPI = "https://travelbriefing.org/" + country +"?format=json";
 
-fetch(travelAPI)
-.then(function (response) {
-    if (!response || !response.ok) {
-        throw new Error('Opps! No response');
-    };
-    return response.json();
-})
-.then(function(responseStr) {
-
-    // Turn response string to object
-    console.log(responseStr)
-
-});
+    fetch(travelAPI)
+    .then(function (response) {
+        if (!response || !response.ok) {
+            throw new Error('Opps! No response');
+        };
+        return response.json();
+    })
+    .then(function(responseStr) {
+    
+        console.log(responseStr)
+    
+    });
+}
