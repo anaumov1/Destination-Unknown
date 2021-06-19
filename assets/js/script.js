@@ -252,7 +252,6 @@ var travelAPI = "https://travelbriefing.org/" + country +"?format=json";
 fetch(travelAPI)
 .then(function (response) {
     if (!response || !response.ok) {
-        status = true;
         throw new Error('Opps! No response');
     };
     return response.json();
