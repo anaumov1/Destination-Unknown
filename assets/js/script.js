@@ -271,11 +271,12 @@ function fetchTravelApi() {
 
             //display currency
         });
+        travelAPI_2(countryOfTravel)
 }
 //api to get the country capital calling codes , flags etc
-function travelAPI_2()
+function travelAPI_2(countryOfTravel)
 {
- var travelApi2 = 'https://restcountries.eu/rest/v2/name/Pakistan';
+ var travelApi2 = 'https://restcountries.eu/rest/v2/name/'+countryOfTravel;
  fetch(travelApi2)
  .then(function (response) {
      if (!response || !response.ok) {
@@ -284,9 +285,12 @@ function travelAPI_2()
      return response.json();
  })
  .then(function (responseStr) {
+
     console.log(responseStr[0].flag);
+    // will use this to display the flag
+   /* var flag= document.getElementById("flag");
+    flag.setAttribute("src",responseStr[0].flag)*/
 
  });
  
 }
-travelAPI_2()
