@@ -238,14 +238,9 @@ var countryChoice = function (event) {
 }
 
 //Fizza this is the variable you can use for your api. I'm just struggling to pull it out of countryChoice function
-
-
-
-
-//travelBriefUrl = "https://travelbriefing.org/Netherlands?format=json"
-
 function fetchTravelApi() {
-    country = countryChoice;
+    alert(countryOfTravel)
+    country = countryOfTravel;
     var travelAPI = "https://travelbriefing.org/" + country + "?format=json";
 
     fetch(travelAPI)
@@ -256,11 +251,23 @@ function fetchTravelApi() {
             return response.json();
         })
         .then(function (responseStr) {
-            alert("im here")
 // display travel advice
-            console.log("advise:"+ responseStr.advise.UA.advise)
-//display required vaccinatiin
-            console.log(responseStr.advise.UA.advise)
+
+            console.log("advise:"+ responseStr.advise.UA.advise)//FROM AUSTRALIA
+
+            //display required vaccinatiin
+            if(responseStr.vaccinations.length===0)
+            {
+                console.log("There are no vaccinations for "+country)
+            }
+
+                 for ( let i=0; i<responseStr.vaccinations.length;i++)
+                {responseStr.vaccinations
+                    console.log("name: "+responseStr.vaccinations[i].name)
+                    console.log("message: "+responseStr.vaccinations[i].message)
+                  
+                }
+        
 
         });
 }
