@@ -269,6 +269,24 @@ function fetchTravelApi() {
             temp = parseInt(temp).toFixed(1);
             console.log(temp + '°C');
 
-            //cuurency
+            //display currency
         });
 }
+//api to get the country capital calling codes , flags etc
+function travelAPI_2()
+{
+ var travelApi2 = 'https://restcountries.eu/rest/v2/name/Pakistan';
+ fetch(travelApi2)
+ .then(function (response) {
+     if (!response || !response.ok) {
+         throw new Error('Opps! No response');
+     };
+     return response.json();
+ })
+ .then(function (responseStr) {
+    console.log(responseStr[0].flag);
+
+ });
+ 
+}
+travelAPI_2()
