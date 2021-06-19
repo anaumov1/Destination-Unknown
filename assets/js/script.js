@@ -267,6 +267,8 @@ function fetchTravelApi() {
             var currentMonth = moment().format('MMMM'); // returns name eg. January      
             var temp = responseStr.weather[currentMonth].tAvg;
             temp = parseInt(temp).toFixed(1);
-console.log(temp)
+            console.log(temp + '°C');
+
+            //cuurency
         });
 }
