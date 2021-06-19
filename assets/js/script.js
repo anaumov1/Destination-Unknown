@@ -111,14 +111,18 @@ var tripDates = function(){
    for(var d = 0; d<limitedQuotes.length; d ++){ 
    //dateOfDeparture[q]
     dateOfDeparture = limitedQuotes[d].OutboundLeg.DepartureDate
+    console.log(dateOfDeparture);
+    dateOfDeparture = dateOfDeparture.split("T")[0];
     console.log( dateOfDeparture + ": Departure Date ");
+    
     //dateOfReturn[q]
     dateOfReturn = limitedQuotes[d].InboundLeg.DepartureDate
+    dateOfReturn = dateOfReturn.split("T")[0];
     console.log( dateOfReturn + ": Return Date ");
 
     var dateli = document.createElement("li");
     dates.append(dateli);
-    dateli.innerHTML = "Departure: " + dateOfDeparture + "/ Return: " + dateOfReturn;
+    dateli.innerHTML = "Departure: " + dateOfDeparture + "<br/> Return: " + dateOfReturn;
    }
 }
 
@@ -154,35 +158,8 @@ var tripLocation = function(){
         } 
         var destinationli = document.createElement("li");
         destination.append(destinationli);
-        destinationli.innerHTML = "From: " + departurePointOut+" / "+ departureCountryOut + "/ To: " + travelDestinationOut + " / " + travelCountryOut;
-        
-
-        // //inbound flights
-        // destinationId= limitedQuotes[q].InboundLeg.DestinationId;
-        // console.log(destinationId + ": Destination ID ");
-
-        // //origin id
-        // originId = limitedQuotes[q].InboundLeg.OriginId
-        // console.log(originId +  ": Origin ID ");
-    
-    
-        // //convert destination id and origin id into names
-        // for(var c = 0; c < places.length; c++){
-        //     if(destinationId === places[c].PlaceId){
-        //         travelDestination = places[c].Name; 
-        //         console.log(travelDestination+ ": Location of Travel ")
-        //         travelCountry = places[c].CountryName;
-        //         console.log(travelCountry + ": Country of Travel");
-        //     }
-    
-        //     //compare quoted origin id to PlaceId to find a match
-        //     if(originId === places[c].PlaceId){
-        //         departurePoint = places[c].Name;
-        //         console.log(  departurePoint + " Place of Departure")
-        //         departureCountry = places[c].CountryName;
-        //         console.log(departureCountry + " Country of Departure")
-        //     }
-        // }   
+        destinationli.innerHTML = "From: " + departurePointOut+" / "+ departureCountryOut + "<br/> To: " + travelDestinationOut + " / " + travelCountryOut;
+               
     }
 }
 
@@ -203,7 +180,7 @@ var flightCarriers = function(){
                     console.log(airlineNameOut + " Carrier Name " )
                     var airlinesli = document.createElement("li");
                     airlines.append(airlinesli);
-                    airlinesli.innerHTML = airlineNameOut
+                    airlinesli.innerHTML = airlineNameOut + "<br/>"
                 }              
             }     
         }
@@ -220,7 +197,7 @@ var pricingInformation = function(){
         console.log(price + " min price ");
         var priceli = document.createElement("li")
         pricing.append(priceli);
-        priceli.innerHTML = "$ "+ price;
+        priceli.innerHTML = "$ "+ price +" <br/>";
     }
 }
 
