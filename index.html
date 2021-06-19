@@ -1,14 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+​
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+​
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Open+Sans&family=Playfair+Display+SC&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/styles.css" />
     <title>Document</title>
 </head>
-<body>
-    <h1>our first projec</h1>
-    <script src = "./assets/js/script.js"></script>
-
+​
+<body class=".container.is-max-widescreen">
+    <!--navbar-->
+    <div class="navbar-brand">
+        <!--logo and name-->
+        <h1 class="navbar-item navbar-start is-size-3 has-text-weight-bold"> <i class="fas fa-plane-departure"></i>
+            <span>Destination Unknown</span>
+        </h1>
+        <!--local time-->
+        <div class="navbar-item navbar-end is-size-5" id="clock"> Local Time: </div>
+    </div>
+    <!--hero section-->
+    <div class="hero">
+        <!--columns to split box into two parts-->
+        <div class="columns">
+            <!--column one - right side - form for inputs -->
+            <div class="column is-one-third form">
+                <h2 class="is-size-5 has-text-weight-bold"> Search All Flights</h2>
+                <label class="is-grey-dark">From</label>
+                </br>
+                <!--dropdown for home airport-->
+                <div class="relative inline-flex">
+                    <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
+                        <path
+                            d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                            fill="#648299" fill-rule="nonzero" />
+                    </svg>
+                    <select
+                        class="border border-gray-300 rounded text-gray-700  h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                        <option>Choose home airport</option>
+                        <option  value="DAL-sky">"DFW" Dallas Fort-Worth</option>
+                        <option  value="DAL-sky">"DAL" Dallas Love Field </option>
+                        <option  value="IAH-sky">"IAH" Houston</option>
+                        <option  value="AUM-sky">"AUM" Austin</option>
+                    </select>
+                </div>
+                </br>
+                <label>To</label>
+                <input class="input" type="text" placeholder="Leave blank if you feel adventurous!">
+                <label>How soon can you go?</label>
+                </br>
+                <!--dropdown for time frames-->
+                <div class="relative inline-flex">
+                    <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
+                        <path
+                            d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                            fill="#648299" fill-rule="nonzero" />
+                    </svg>
+                    <select
+                        class="border border-gray-300 rounded text-gray-700  h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                        <option >Choose time window</option>
+                        <option  value="DAL-sky">6-12 hrs</option>
+                        <option  value="DAL-sky">12-18 hrs </option>
+                        <option  value="IAH-sky">18-24 hrs</option>
+                        <option  value="AUM-sky">24-48 hrs</option>
+                    </select>
+                </div>
+               
+                </br>
+                <!--calendar form-->
+                <form action="/action_page.php">
+                    <label class="mt-12" for="return-date">Returning on</label>
+                    <input  class="text-gray-600 mt-2 rounded h-10" type="date" id="return-date" name="return-date">
+                    <button class="button is-warning mt-2 ml-36">Let's go</button>
+                  </form>
+                
+            </div>
+            <!--column two - left side - hero text-->
+            <div class="column hero-text">
+                <h2>For when you just want </br> to get away!</h2>
+            </div>
+        </div>
+    </div>
+​
+    <!--Serch REsults BOX will appire after search button clicked-->
+    <div id="search-results-box">
+        <div class=columns>
+            <!--to re-style results box use  class .result or id #search-results-box-->
+            <div class="column results is-three-fifths is-offset-one-fifth">
+                <h2 class="is-size-4 has-text-weight-bold">Flight results</h2>
+                <!--row to insert fetched data-->
+                <div class="row">
+                    <div class="column">
+                        <!--container number one - lane one - for data components-->
+                        <div class="columns" id="flight-display">
+                            <!--airline-->
+                            <div class="column is-one-quarter serch-component">
+                                <ul id = "airlines">
+                                </ul>
+                            </div>
+                            <!--XYZ -YZX-->
+                            <div class="column is-one-quarter serch-component">
+                                <ul id = "destination">
+                                </ul>
+                            </div>
+                            <!--time and date-->
+                            <div class="column is-one-quarter serch-component">
+                                <ul id = "dates">
+                                </ul>
+                            </div>
+                            <!--price-->
+                            <div class="column is-one-quarter serch-component" >
+                                <ul id = "pricing">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+​
+                </div>
+            </div>
+        </div>
+    </div>
+​
+    <script src="https://kit.fontawesome.com/542d56e2f0.js" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
+​
 </html>
