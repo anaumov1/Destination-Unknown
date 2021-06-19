@@ -235,7 +235,7 @@ var countryChoice = function(event){
 }
 
 
-console.log(CountryOut);
+//console.log(CountryOut);
 
 
 //Fizza this is the variable you can use for your api. I'm just struggling to pull it out of countryChoice function
@@ -244,12 +244,18 @@ console.log(CountryOut);
 
 
 
-travelBriefUrl = "https://travelbriefing.org/Netherlands?format=json"
+//travelBriefUrl = "https://travelbriefing.org/Netherlands?format=json"
 
-fetch(travelBriefUrl)
-.then(function(response){
-    return response.json();
+var travelAPI = "https://travelbriefing.org/" + country +"?format=json";
+
+$.ajax({
+    url:travelAPI,
+    method: "GET"
 })
-.then(function(data){
-    console.log(data);
-})
+.then(function(responseStr) {
+
+    // Turn response string to object
+    var response = JSON.parse(responseStr)
+    console.log(response)
+
+});
