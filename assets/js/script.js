@@ -53,6 +53,7 @@ setInterval(clock, 1000);
  var dayOfReturn;
  var airlineNameOut;
  var airlineNameIn;
+ var countryOfTravel;
 
 
  var pricing = document.querySelector("#pricing");
@@ -122,10 +123,12 @@ var tripDates = function(){
 
     var dateli = document.createElement("li");
     dates.append(dateli);
+    dateli.setAttribute("style","height: 150px")
     dateli.innerHTML = "Departure: " + dateOfDeparture + "<br/> Return: " + dateOfReturn;
    }
 }
 
+var CountryOut = [];
 var tripLocation = function(){
     for(var l = 0; l<limitedQuotes.length; l++){
         //outbound flights
@@ -145,6 +148,7 @@ var tripLocation = function(){
                 travelDestinationOut = places[c].Name; 
                 console.log(travelDestinationOut+ ": Location of Travel ")
                 travelCountryOut = places[c].CountryName;
+                CountryOut.push(travelCountryOut);
                 console.log(travelCountryOut + ": Country of Travel");
             }
  
@@ -158,6 +162,7 @@ var tripLocation = function(){
         } 
         var destinationli = document.createElement("li");
         destination.append(destinationli);
+        destinationli.setAttribute("style","height: 150px");
         destinationli.innerHTML = "From: " + departurePointOut+" / "+ departureCountryOut + "<br/> To: " + travelDestinationOut + " / " + travelCountryOut;
                
     }
@@ -179,6 +184,7 @@ var flightCarriers = function(){
                     airlineNameOut = carriers[n].Name 
                     console.log(airlineNameOut + " Carrier Name " )
                     var airlinesli = document.createElement("li");
+                    airlinesli.setAttribute("style","height: 150px")
                     airlines.append(airlinesli);
                     airlinesli.innerHTML = airlineNameOut + "<br/>"
                 }              
@@ -197,12 +203,44 @@ var pricingInformation = function(){
         console.log(price + " min price ");
         var priceli = document.createElement("li")
         pricing.append(priceli);
+        priceli.setAttribute("style","height: 150px")
         priceli.innerHTML = "$ "+ price +" <br/>";
+
+        var priceBtn = document.createElement("button")
+        priceBtn.setAttribute("class", "button is-warning select-button");
+        priceBtn.setAttribute("id", "Button-" + q);
+        priceBtn.textContent = "Select"
+        priceli.append(priceBtn);
     }
+    addEventListenertoSelect();
+}
+
+var addEventListenertoSelect = function(){
+    var allSelectBtns = document.querySelectorAll(".select-button")
+    for(var e = 0; e < allSelectBtns.length; e++){
+        allSelectBtns[e].addEventListener("click",countryChoice)
+    }
+    console.log(allSelectBtns);
+
+}
+
+var countryChoice = function(event){
+    console.log(event)
+    var btnTarget = event.target.attributes[1].value;
+    btnTarget = btnTarget.split("-")[1];
+    console.log(btnTarget)
+    // console.log(CountryOut[btnTarget])
+    countryOfTravel = CountryOut[btnTarget]
+    
 }
 
 
+console.log(CountryOut);
 
+
+//Fizza this is the variable you can use for your api. I'm just struggling to pull it out of countryChoice function
+
+//console.log(countryOfTravel);
 
 
 
