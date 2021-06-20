@@ -8,10 +8,27 @@ setInterval(clock, 1000);
 
 // dinamycly appned search rresults to searchResultsBox
 var searchResultsBox = document.querySelector("#search-results-box");
+var formSubmit = document.querySelector("#submit");
+
+
+formSubmit.addEventListener('click',function(event){
+    event.preventDefault();
+    var pointOfOrigin = document.getElementById("ptOfOrigin").value;
+    console.log(pointOfOrigin);
+    
+
+
+    
+    
+})
+
+
 
 // find the html element with the id of time
 // set the innerHTML of that element to the date a space the time
 //document.getElementById('datetime').innerHTML = n + ' ' + time;
+
+//link form to api
 
 
 
@@ -28,8 +45,8 @@ var searchResultsBox = document.querySelector("#search-results-box");
 //locale:en-US
 //originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
 
-var departureDate = "2021-06-19";
-var returnDate = "2021-06-25";
+var departureDate = "2021-06-21";
+var returnDate = "2021-06-30";
 var destinationPlace = "anywhere";
 var pointOfOrigin = "DFWA-sky";
 var resultsLocale = "en-US"; //what we want results in
@@ -54,6 +71,12 @@ var dayOfReturn;
 var airlineNameOut;
 var airlineNameIn;
 var countryOfTravel;
+
+
+
+
+
+
 
 
 var pricing = document.querySelector("#pricing");
