@@ -6,6 +6,23 @@ function clock() {
 
 setInterval(clock, 1000);
 
+//dinamycly appned search rresults to searchInfoBox
+var searchBtn = document.getElementById("search-btn");
+searchBtn.onclick = function () {
+var searchInfoBox = document.querySelector("#search-info-box");
+searchInfoBox.setAttribute("class", "clickStyle");
+var fromTo = document.querySelector("#from-to");
+var flyingFrom = documnet.querySelector("#flying-from").value;
+var flyingTo = document.querySelector("#flying-to").value
+var arrowsIcon = document.createElement("h4");
+arrowsIcon.setAttribute("class","sourceText");
+arrowsIcon.append('<i class="fa-solid fa-right-left"></i>')
+fromTo.innerHTML = '<div>' + flyingFrom + arrowsIcon + flyingTo + '</div>';
+
+var returnDate = document.querySelector("#return-date").value;
+var returnDateInfo = document.querySelector("#return-date-info");
+returnDateInfo.innerHTML = '<div>'+ "Returning on" + returnDate + '</div>';
+}
 // dinamycly appned search rresults to searchResultsBox
 var searchResultsBox = document.querySelector("#search-results-box");
 var formSubmit = document.querySelector("#submit");
@@ -21,6 +38,31 @@ formSubmit.addEventListener('click',function(event){
     
     
 })
+
+
+
+//saved countries box
+
+// load searches from local storage
+var loadCountries = function () {
+    countries = JSON.parse(localStorage.getItem("countries"));
+    if (!countries) {
+        countries = [];
+    }
+    $("#saved-countries").empty();
+
+    countries.forEach(function (country) {
+        $("#saved-countries").append("<button class='country-btn'>" + country + "</button>")
+    })
+}
+// save searches to local storage
+var saveCountries = function () {
+    localStorage.setItem("countries", JSON.stringify(countries));
+}
+
+
+
+
 
 
 
