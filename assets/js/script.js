@@ -6,8 +6,50 @@ function clock() {
 
 setInterval(clock, 1000);
 
+//dinamycly appned search rresults to searchInfoBox
+var searchBtn = document.getElementById("search-btn");
+searchBtn.onclick = function () {
+var searchInfoBox = document.querySelector("#search-info-box");
+searchInfoBox.setAttribute("class", "clickStyle");
+var fromTo = document.querySelector("#from-to");
+var flyingFrom = documnet.querySelector("#flying-from").value;
+var flyingTo = document.querySelector("#flying-to").value
+var arrowsIcon = document.createElement("h4");
+arrowsIcon.setAttribute("class","sourceText");
+arrowsIcon.append('<i class="fa-solid fa-right-left"></i>')
+fromTo.innerHTML = '<div>' + flyingFrom + arrowsIcon + flyingTo + '</div>';
+
+var returnDate = document.querySelector("#return-date").value;
+var returnDateInfo = document.querySelector("#return-date-info");
+returnDateInfo.innerHTML = '<div>'+ "Returning on" + returnDate + '</div>';
+}
 // dinamycly appned search rresults to searchResultsBox
 var searchResultsBox = document.querySelector("#search-results-box");
+
+//saved countries box
+
+// load searches from local storage
+var loadCountries = function () {
+    countries = JSON.parse(localStorage.getItem("countries"));
+    if (!countries) {
+        countries = [];
+    }
+    $("#saved-countries").empty();
+
+    countries.forEach(function (country) {
+        $("#saved-countries").append("<button class='country-btn'>" + country + "</button>")
+    })
+}
+// save searches to local storage
+var saveCountries = function () {
+    localStorage.setItem("countries", JSON.stringify(countries));
+}
+
+
+
+
+
+
 
 // find the html element with the id of time
 // set the innerHTML of that element to the date a space the time
@@ -28,7 +70,7 @@ var searchResultsBox = document.querySelector("#search-results-box");
 //locale:en-US
 //originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
 
-var departureDate = "2021-06-19";
+var departureDate = "2021-06-21";
 var returnDate = "2021-06-25";
 var destinationPlace = "anywhere";
 var pointOfOrigin = "DFWA-sky";
