@@ -122,6 +122,7 @@ formSubmit.addEventListener('click',function(event){
     //formating date to YYYY/MM/DD
     var returnDateFormat = moment(returnDate).format("YYYY/MM/DD");
     console.log(returnDateFormat);
+    console.log(returnDate);
     var destinationPlace = document.getElementById("flying-to").value
     console.log(destinationPlace);
     if(destinationPlace){
