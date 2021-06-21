@@ -1,79 +1,48 @@
-var clockElement = document.getElementById("clock");
-
-function clock() {
-    clockElement.textContent = new Date().toString();
-}
-
-setInterval(clock, 1000);
-
-//dinamycly appned search rresults to searchInfoBox
-var searchBtn = document.getElementById("search-btn");
-searchBtn.onclick = function () {
-var searchInfoBox = document.querySelector("#search-info-box");
-searchInfoBox.setAttribute("class", "clickStyle");
-var fromTo = document.querySelector("#from-to");
-var flyingFrom = documnet.querySelector("#flying-from").value;
-var flyingTo = document.querySelector("#flying-to").value
-var arrowsIcon = document.createElement("h4");
-arrowsIcon.setAttribute("class","sourceText");
-arrowsIcon.append('<i class="fa-solid fa-right-left"></i>')
-fromTo.innerHTML = '<div>' + flyingFrom + arrowsIcon + flyingTo + '</div>';
-
-var returnDate = document.querySelector("#return-date").value;
-var returnDateInfo = document.querySelector("#return-date-info");
-returnDateInfo.innerHTML = '<div>'+ "Returning on" + returnDate + '</div>';
-}
-// dinamycly appned search rresults to searchResultsBox
-var searchResultsBox = document.querySelector("#search-results-box");
-var formSubmit = document.querySelector("#submit");
-
-
-formSubmit.addEventListener('click',function(event){
-    event.preventDefault();
-    var pointOfOrigin = document.getElementById("ptOfOrigin").value;
-    console.log(pointOfOrigin);
+function display_clock() {
+    var x = new Date()
+    var ampm = x.getHours( ) >= 12 ? ' PM' : ' AM';
     
-
-
-    
-    
-})
-
-
-
-//saved countries box
-
-// load searches from local storage
-var loadCountries = function () {
-    countries = JSON.parse(localStorage.getItem("countries"));
-    if (!countries) {
-        countries = [];
+    var x1=x.getMonth() + 1+ "/" + x.getDate() + "/" + x.getFullYear(); 
+    x1 = x1 + " - " +  x.getHours( )+ ":" +  x.getMinutes() + ":" +  x.getSeconds() + ":" + ampm;
+    document.getElementById('clock').innerHTML = x1;
+    display_c5();
+     }
+     function display_c5(){
+    var refresh=1000; // Refresh rate in milli seconds
+    mytime=setTimeout('display_clock()',refresh)
     }
-    $("#saved-countries").empty();
+    display_c5()
 
-    countries.forEach(function (country) {
-        $("#saved-countries").append("<button class='country-btn'>" + country + "</button>")
-    })
-}
-// save searches to local storage
-var saveCountries = function () {
-    localStorage.setItem("countries", JSON.stringify(countries));
-}
+// Leaving on DATE
+$( function() {
+    $( "#datepicker" ).datepicker({
+        minDate: 1,
+        dateFormat: "yy/dd/mm"
+    });
+   } );
 
-
-
+ 	
 
 
 
+// //saved countries box
 
-// find the html element with the id of time
-// set the innerHTML of that element to the date a space the time
-//document.getElementById('datetime').innerHTML = n + ' ' + time;
+// // load searches from local storage
+// var loadCountries = function () {
+//     countries = JSON.parse(localStorage.getItem("countries"));
+//     if (!countries) {
+//         countries = [];
+//     }
+//     $("#saved-countries").empty();
 
-//link form to api
-
-
-
+//     countries.forEach(function (country) {
+//         $("#saved-countries").append("<button class='country-btn'>" + country + "</button>")
+//     })
+// }
+// // save searches to local storage
+// var saveCountries = function () {
+//     localStorage.setItem("countries", JSON.stringify(countries));
+// }
 
 
 
@@ -87,11 +56,9 @@ var saveCountries = function () {
 //locale:en-US
 //originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
 
-var departureDate = "2021-06-21";
-var returnDate = "2021-06-30";
-var destinationPlace = "anywhere";
-var pointOfOrigin = "DFWA-sky";
-var resultsLocale = "en-US"; //what we want results in
+var departureDate = "2021-06-22";
+//var destinationPlace = "anywhere";
+var resultsLocale = "en-US"; 
 var currency = "USD";
 var marketCountry = "US";
 var limitedQuotes = [];
@@ -113,64 +80,145 @@ var dayOfReturn;
 var airlineNameOut;
 var airlineNameIn;
 var countryOfTravel;
+var allPlaces;
+var skyScannerCountryCode;
+var skyScannerStationCode;
+var returnDate;
+
+// //get places to compare against search
+// fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/DFWA-sky/anywhere/anytime/anytime", {
+//     "method": "GET",
+//     "headers": {
+//         "x-rapidapi-key": "9f26d8ac82msh2648fcef3be4079p1494e7jsn9b0c1ca6e817",
+//         "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+//     }
+// })
+//     .then(function (results) {
+//         return results.json();
+//     })
+//     .then(function(results) {
+//     allPlaces = results.Places
+//     console.log(allPlaces);
+// })
 
 
 
-
-
-
-
-
+var flightDisplay = document.getElementById("flight-display")
 var pricing = document.querySelector("#pricing");
 var dates = document.querySelector("#dates");
 var destination = document.querySelector("#destination");
 var airlines = document.querySelector("#airlines")
+var formSubmit = document.querySelector("#submit");
 
-fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/" + marketCountry + "/" + currency + "/" + resultsLocale + "/" + pointOfOrigin + "/" + destinationPlace + "/" + departureDate + "/" + returnDate, {
-    "method": "GET",
-    "headers": {
-        "x-rapidapi-key": "9f26d8ac82msh2648fcef3be4079p1494e7jsn9b0c1ca6e817",
-        "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
+
+
+formSubmit.addEventListener('click',function(event){
+    event.preventDefault();
+    var pointOfOrigin = document.getElementById("ptOfOrigin").value;
+    console.log(pointOfOrigin);
+    // var departureDate = document.querySelector("#departure-date").value;
+    // console.log(departureDate);
+    returnDate = document.querySelector("#return-date").value;
+    //formating date to YYYY/MM/DD
+    var returnDateFormat = moment(returnDate).format("YYYY/MM/DD");
+    console.log(returnDateFormat);
+    var destinationPlace = document.getElementById("flying-to").value
+    console.log(destinationPlace);
+    if(destinationPlace){
+        // var destinationCountry = destinationPlace.split(" ")
+        // for (let i = 0; i < destinationCountry.length; i++) {
+        //     destinationCountry[i] = destinationCountry[i][0].toUpperCase() + destinationCountry[i].substr(1);
+        //     destinationPlace = destinationCountry.join(" ");
+        // }
+        // for(var i = 0; i< allPlaces.length; i++){
+        //     if(destinationPlace === allPlaces[i].Name){
+        //         skyScannerCountryCode = allPlaces[i].SkyscannerCode;
+        //         destinationPlace = skyScannerCountryCode
+        //         console.log(destinationPlace);
+
+        //     }
+        // } 
     }
-})
-    .then(function (results) {
-        return results.json();
-    })
-    .then(function (results) {
-        console.log(results);
+    else{
+        destinationPlace = "anywhere"
+        console.log(destinationPlace);
+        
+    }
 
-        //pull carriers from fetch response
-        carriers = results.Carriers;
-        console.log(carriers);
-        console.log(carriers.length);
+    
 
-        //pull quotes from fetch response
-        quotes = results.Quotes;
-        console.log(quotes);
-        console.log(quotes.length);
+    
 
-        //pull places from fetch response
-        places = results.Places
-        console.log(places)
-        console.log(places.length);
 
-        //reduce quotes to only thoses with direct flights
-        for (var i = 0; i < quotes.length; i++) {
-            if (quotes[i].Direct === true) {
-                limitedQuotes.push(quotes[i]);
-                console.log(limitedQuotes);
-            }
+    
+    
+
+
+    fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/" + marketCountry + "/" + currency + "/" + resultsLocale + "/" + pointOfOrigin + "/" + destinationPlace + "/" + departureDate + "/" + returnDate, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "9f26d8ac82msh2648fcef3be4079p1494e7jsn9b0c1ca6e817",
+            "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
         }
-
-        pricingInformation();
-        tripDates();
-        tripLocation();
-        flightCarriers();
-
     })
-    .catch(function (err) {
-        console.error(err);
-    })
+        .then(function (results) {
+            return results.json();
+        })
+        .then(function (results) {
+            console.log(results);
+
+            //pull carriers from fetch response
+            carriers = results.Carriers;
+            console.log(carriers);
+            console.log(carriers.length);
+
+            //pull quotes from fetch response
+            quotes = results.Quotes;
+            console.log(quotes);
+            console.log(quotes.length);
+
+            //pull places from fetch response
+            places = results.Places
+            console.log(places)
+            console.log(places.length);
+
+            //reduce quotes to only thoses with direct flights
+            for (var i = 0; i < quotes.length; i++) {
+                if (quotes[i].Direct === true) {
+                    limitedQuotes.push(quotes[i]);
+                    console.log(limitedQuotes);
+                }
+            }
+
+            pricingInformation();
+            tripDates();
+            tripLocation();
+            flightCarriers();
+
+        })
+        .catch(function (err) {
+            console.error(err);
+        })
+
+    
+})
+
+
+//function to clear results if multiple queries are performed at once before a reload of page. NEED TO GET THIS TO WORK!!. IT currently appends the fligths to bottom of the flight-display container.
+// var clearResults = function(){
+//     if(flightDisplay === " " || null){
+//         alert("no results yet");
+//         return;
+//     }
+//     else{
+//         alert("clear results please")
+//         //flightDisplay = document.getElementById("flight-display").innerHTML = "";
+//     }
+   
+
+// }
+
+    
 
 
 var tripDates = function () {
@@ -257,6 +305,21 @@ var flightCarriers = function () {
         }
         else {
             console.log("different carriers")
+            for (var n = 0; n < carriers.length; n++) {
+                if (carrierId === carriers[n].CarrierId){
+                    airlineNameOut = carriers[n].Name
+                    console.log(airlineNameOut + " Carrier Name ");
+                }
+                if(carrierIdIn === carriers[n].CarrierId){
+                    airlineNameIn = carriers[n].Name
+                    console.log(airlineNameIn + " Carrier Name In")
+                
+                    var airlinesli = document.createElement("li");
+                    airlinesli.setAttribute("style", "height: 150px")
+                    airlines.append(airlinesli);
+                    airlinesli.innerHTML = airlineNameOut + "/<br/>" + airlineNameIn;
+                }   
+            }
         }
     }
 }
@@ -297,6 +360,25 @@ var countryChoice = function (event) {
     console.log(btnTarget)
     // console.log(CountryOut[btnTarget])
     countryOfTravel = CountryOut[btnTarget]
+
+    console.log(countryOfTravel);
+    var fromTo = document.querySelector("#from-to");
+    fromTo.innerHTML = " " + travelDestinationOut;
+    fromTo.setAttribute("style", "padding-right: 50px");
+    var returnDateInfo = document.querySelector("#return-date-info");
+    returnDateInfo.innerHTML = returnDate;
+
+    var iconContainer = document.querySelector("#icon");
+    iconImage = document.createElement("i");
+    iconContainer.append(iconImage)
+    iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
+    
+    
+    
+
+    
+    
+
 
     fetchTravelApi();
 
