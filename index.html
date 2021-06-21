@@ -24,13 +24,14 @@
     <!--navbar-->
     <div class="navbar-brand">
         <!--logo and name-->
-        <h1 class=" is-0 navbar-item navbar-start is-size-3 has-text-weight-bold"> <i class="fas fa-plane-departure"></i>
+        <h1 class=" is-0 navbar-item navbar-start is-size-3 has-text-weight-bold"> <i
+                class="fas fa-plane-departure"></i>
             <span>Destination Unknown</span>
         </h1>
         <!--local time-->
         <div class="is-0 navbar-item navbar-end is-size-5" id="clock"> Local Time: </div>
     </div>
- <!--hero section-->
+    <!--hero section-->
     <div class="hero">
         <!--columns to split box into two parts-->
         <div id="hero-style" class="columns ">
@@ -47,27 +48,34 @@
                             d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                             fill="#648299" fill-rule="nonzero" />
                     </svg>
-                    <select class="border border-gray-300 rounded text-gray-700  h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none" id ="ptOfOrigin">
-                        <option >Choose home airport</option>
-                        <option  value="DFWA-sky">"DFW" Dallas Fort-Worth</option>
-                        <option  value="IAH-sky">"IAH" Houston</option>
-                        <option  value="AUM-sky">"AUM" Austin</option>
+                    <select
+                        class="border border-gray-300 rounded text-gray-700  h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+                        id="ptOfOrigin">
+                        <option>Choose home airport</option>
+                        <option value="DFWA-sky">"DFW" Dallas Fort-Worth</option>
+                        <option value="IAH-sky">"IAH" Houston</option>
+                        <option value="AUM-sky">"AUM" Austin</option>
                     </select>
                 </div>
                 </br>
                 <label>To</label>
-                <input id="flying-to" class="input" type="text" placeholder="Leave blank if you feel adventurous!" value="anywhere">
-                <label>Leaving on</label>
-                <input class="text-gray-600 mt-2 rounded h-10" type="text" id="datepicker" name="leaving-date">
-                </br>
-                <!--calendar form-->
+                <input id="flying-to" class="input" type="text" placeholder="Leave blank if you feel adventurous!"
+                    value="anywhere">
+
+                <!--calendar form - departure-->
+                <form action="/action_page.php">
+                    <label class="mt-12" for="departure-date">Leaving on</label>
+                    <input class="text-gray-600 mt-2 rounded h-10" type="date" id="departure-date" name="departure-date">
+
+                </form>
+                <!--calendar form - returning-->
                 <form action="/action_page.php">
                     <label class="mt-12" for="return-date">Returning on</label>
-                    <input  class="text-gray-600 mt-2 rounded h-10" type="date" id="return-date" name="return-date">
-                    
-                    <button class="button is-warning mt-2 ml-36"id = "submit">Let's go</button>
-                  </form>
-                
+                    <input class="text-gray-600 mt-2 rounded h-10" type="date" id="return-date" name="return-date">
+                </form>
+
+                <button class="button is-warning mt-2 ml-36" id="submit">Let's go</button>
+
             </div>
             <!--column two - left side - hero text-->
             <div class="column hero-text ">
@@ -77,20 +85,21 @@
     </div>
     ​
     <!--serch info box-->
-        <div id="search-results-box"> 
-            <div class="columns bg-gradient-to-r from-gray-400 via-gray-700 to-gray-900">
+    <div id="search-results-box">
+        <div class="columns bg-gradient-to-r from-gray-400 via-gray-700 to-gray-900">
             <div class="column results is-three-fifths is-offset-one-fifth ">
                 <div class="columns">
                     <!--div for to and from locations-->
-                    <div class="column text-xl font-semibold">Heading to: <span id = "from-to"></span><span id = "icon"><i style='font-size:24px' class='fas'>&#xf35a;</i></span></div>
+                    <div class="column text-xl font-semibold">Heading to: <span id="from-to"></span><span id="icon"><i
+                                style='font-size:24px' class='fas'>&#xf35a;</i></span></div>
                     <!--div for return date-->
                     <div class="column text-xl font-semibold">Returning on: <span id="return-date-info"></span></div>
                 </div>
             </div>
-            </div>
-    <!--Search Results BOX will appear after search button clicked-->
-    
         </div>
+        <!--Search Results BOX will appear after search button clicked-->
+
+    </div>
 
 
 
@@ -102,50 +111,54 @@
                 <h2 class="is-size-4 has-text-weight-bold">Flight results</h2>
                 <!--row to insert fetched data-->
                 <div class="row">
-                        <!--container number one - lane one - for data components-->
-                        <div class="columns" id="flight-display">
-                            <!--airline-->
-                            <div class="column is-one-quarter serch-component">
-                                <ul id="airlines">
-                                </ul>
-                            </div>
-                            <!--XYZ -YZX-->
-                            <div class="column is-one-quarter serch-component">
-                                <ul id="destination">
-                                </ul>
-                            </div>
-                            <!--time and date-->
-                            <div class="column is-one-quarter serch-component">
-                                <ul id="dates">
-                                </ul>
-                            </div>
-                            <!--price-->
-                            <div class="column is-one-quarter serch-component">
-                                <ul id="pricing">
-                                </ul>
-                            </div>
-                        </div>                    ​
+                    <!--container number one - lane one - for data components-->
+                    <div class="columns" id="flight-display">
+                        <!--airline-->
+                        <div class="column is-one-quarter serch-component">
+                            <ul id="airlines">
+                            </ul>
+                        </div>
+                        <!--XYZ -YZX-->
+                        <div class="column is-one-quarter serch-component">
+                            <ul id="destination">
+                            </ul>
+                        </div>
+                        <!--time and date-->
+                        <div class="column is-one-quarter serch-component">
+                            <ul id="dates">
+                            </ul>
+                        </div>
+                        <!--price-->
+                        <div class="column is-one-quarter serch-component">
+                            <ul id="pricing">
+                            </ul>
+                        </div>
+                    </div> ​
                 </div>
             </div>
         </div>
     </div>
-    ​<!--Saved Cuontries box-->
+    ​
+    <!--Saved Cuontries box-->
     <div id="saved-countries"></div>
     <!--Footer-->
     <footer class="footer-info columns is-vcentered footer">
         <div class="column is-4"></div>
-        <div class="column is-2 is-size-6 has-text-weight-semibold"><p class="contact">Connect with us </p></div>
-        <div class="column"> <a href="#" class="fa fa-facebook"></a> 
-         <a href="#" class="fa fa-twitter"></a>
-        <a href="#" class="fa fa-google"></a> 
-         <a href="#" class="fa fa-youtube"></a>
-         <a href="#" class="fa fa-instagram"></a> </div>
+        <div class="column is-2 is-size-6 has-text-weight-semibold">
+            <p class="contact">Connect with us </p>
+        </div>
+        <div class="column"> <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-youtube"></a>
+            <a href="#" class="fa fa-instagram"></a>
+        </div>
         <div class="column is-4"></div>
-      </footer>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://kit.fontawesome.com/542d56e2f0.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 ​

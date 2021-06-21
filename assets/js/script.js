@@ -13,14 +13,6 @@ function display_clock() {
     }
     display_c5()
 
-// Leaving on DATE
-$( function() {
-    $( "#datepicker" ).datepicker({
-        minDate: 1,
-        dateFormat: "yy/dd/mm"
-    });
-   } );
-
  	
 
 
@@ -116,8 +108,11 @@ formSubmit.addEventListener('click',function(event){
     event.preventDefault();
     var pointOfOrigin = document.getElementById("ptOfOrigin").value;
     console.log(pointOfOrigin);
-    // var departureDate = document.querySelector("#departure-date").value;
-    // console.log(departureDate);
+    var departureDate = document.querySelector("#departure-date").value;
+    //formating date to YYYY/MM/DD
+    var departureDateFormat = moment(departureDate).format("YYYY/MM/DD");
+    console.log(departureDateFormat);
+    console.log(departureDate);
     returnDate = document.querySelector("#return-date").value;
     //formating date to YYYY/MM/DD
     var returnDateFormat = moment(returnDate).format("YYYY/MM/DD");
