@@ -48,7 +48,7 @@ function display_clock() {
 //locale:en-US
 //originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
 
-var departureDate = "2021-06-22";
+// var departureDate = "2021-06-22";
 var destinationPlace = "anywhere";
 var resultsLocale = "en-US"; 
 var currency = "USD";
@@ -101,6 +101,7 @@ var dates = document.querySelector("#dates");
 var destination = document.querySelector("#destination");
 var airlines = document.querySelector("#airlines")
 var formSubmit = document.querySelector("#submit");
+var previousSearchContainer = document.querySelector("#saved-countries");
 
 
 
@@ -120,26 +121,26 @@ formSubmit.addEventListener('click',function(event){
     console.log(returnDate);
     var destinationPlace = document.getElementById("flying-to").value
     console.log(destinationPlace);
-    if(destinationPlace){
-        // var destinationCountry = destinationPlace.split(" ")
-        // for (let i = 0; i < destinationCountry.length; i++) {
-        //     destinationCountry[i] = destinationCountry[i][0].toUpperCase() + destinationCountry[i].substr(1);
-        //     destinationPlace = destinationCountry.join(" ");
-        // }
-        // for(var i = 0; i< allPlaces.length; i++){
-        //     if(destinationPlace === allPlaces[i].Name){
-        //         skyScannerCountryCode = allPlaces[i].SkyscannerCode;
-        //         destinationPlace = skyScannerCountryCode
-        //         console.log(destinationPlace);
+    // if(destinationPlace){
+    //     // var destinationCountry = destinationPlace.split(" ")
+    //     // for (let i = 0; i < destinationCountry.length; i++) {
+    //     //     destinationCountry[i] = destinationCountry[i][0].toUpperCase() + destinationCountry[i].substr(1);
+    //     //     destinationPlace = destinationCountry.join(" ");
+    //     // }
+    //     // for(var i = 0; i< allPlaces.length; i++){
+    //     //     if(destinationPlace === allPlaces[i].Name){
+    //     //         skyScannerCountryCode = allPlaces[i].SkyscannerCode;
+    //     //         destinationPlace = skyScannerCountryCode
+    //     //         console.log(destinationPlace);
 
-        //     }
-        // } 
-    }
-    else{
-        destinationPlace = "anywhere"
-        console.log(destinationPlace);
+    //     //     }
+    //     // } 
+    // }
+    // else{
+    //     destinationPlace = "anywhere"
+    //     console.log(destinationPlace);
         
-    }
+    // }
 
     
 
@@ -356,6 +357,7 @@ var countryChoice = function (event) {
     console.log(btnTarget)
     // console.log(CountryOut[btnTarget])
     countryOfTravel = CountryOut[btnTarget]
+    previousSearchBtn
 
     console.log(countryOfTravel);
     var fromTo = document.querySelector("#from-to");
