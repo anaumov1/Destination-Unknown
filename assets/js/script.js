@@ -398,7 +398,12 @@ var countryChoice = function (event) {
     console.log(btnTarget)
     // console.log(CountryOut[btnTarget])
     countryOfTravel = CountryOut[btnTarget]
-    previousSearchBtn
+    var previousSearchBtn = document.createElement("button");
+    previousSearchBtn.setAttribute("class", "button is-warning select-button previousSearch");
+    previousSearchBtn.style.marginLeft = "20px";
+    previousSearchBtn.style.marginRight = "20px";
+    previousSearchBtn.innerHTML = countryOfTravel;
+    previousSearchContainer.append(previousSearchBtn);
 
     console.log(countryOfTravel);
     var fromTo = document.querySelector("#from-to");

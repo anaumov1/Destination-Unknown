@@ -56,6 +56,20 @@ body {
     border-radius: 15px;
 }
 
+#saved-countries{
+    height: 200px;
+    margin: 20px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    
+}
+
+.previousSearch{
+    flex-grow: 1;
+    
+}
+
 
 
 .hero-text {
