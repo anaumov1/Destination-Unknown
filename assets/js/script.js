@@ -1,10 +1,20 @@
-var clockElement = document.getElementById("clock");
+function display_clock() {
+    var x = new Date()
+    var ampm = x.getHours( ) >= 12 ? ' PM' : ' AM';
+    
+    var x1=x.getMonth() + 1+ "/" + x.getDate() + "/" + x.getFullYear(); 
+    x1 = x1 + " - " +  x.getHours( )+ ":" +  x.getMinutes() + ":" +  x.getSeconds() + ":" + ampm;
+    document.getElementById('clock').innerHTML = x1;
+    display_c5();
+     }
+     function display_c5(){
+    var refresh=1000; // Refresh rate in milli seconds
+    mytime=setTimeout('display_clock()',refresh)
+    }
+    display_c5()
 
-function clock() {
-    clockElement.textContent = new Date().toString();
-}
+ 	
 
-setInterval(clock, 1000);
 
 
 // //saved countries box
@@ -98,9 +108,15 @@ formSubmit.addEventListener('click',function(event){
     event.preventDefault();
     var pointOfOrigin = document.getElementById("ptOfOrigin").value;
     console.log(pointOfOrigin);
-    // var departureDate = document.querySelector("#departure-date").value;
-    // console.log(departureDate);
+    var departureDate = document.querySelector("#departure-date").value;
+    //formating date to YYYY/MM/DD
+    var departureDateFormat = moment(departureDate).format("YYYY/MM/DD");
+    console.log(departureDateFormat);
+    console.log(departureDate);
     returnDate = document.querySelector("#return-date").value;
+    //formating date to YYYY/MM/DD
+    var returnDateFormat = moment(returnDate).format("YYYY/MM/DD");
+    console.log(returnDateFormat);
     console.log(returnDate);
     var destinationPlace = document.getElementById("flying-to").value
     console.log(destinationPlace);
