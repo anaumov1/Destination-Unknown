@@ -1,21 +1,62 @@
 function display_clock() {
     var x = new Date()
-    var ampm = x.getHours( ) >= 12 ? ' PM' : ' AM';
-    
-    var x1=x.getMonth() + 1+ "/" + x.getDate() + "/" + x.getFullYear(); 
-    x1 = x1 + " - " +  x.getHours( )+ ":" +  x.getMinutes() + ":" +  x.getSeconds() + ":" + ampm;
+    var ampm = x.getHours() >= 12 ? ' PM' : ' AM';
+
+    var x1 = x.getMonth() + 1 + "/" + x.getDate() + "/" + x.getFullYear();
+    x1 = x1 + " - " + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds() + ":" + ampm;
     document.getElementById('clock').innerHTML = x1;
     display_c5();
-     }
-     function display_c5(){
-    var refresh=1000; // Refresh rate in milli seconds
-    mytime=setTimeout('display_clock()',refresh)
-    }
-    display_c5()
-
- 	
+}
+function display_c5() {
+    var refresh = 1000; // Refresh rate in milli seconds
+    mytime = setTimeout('display_clock()', refresh)
+}
+display_c5()
 
 
+function showOverview() {
+    var overviewDisplay = document.querySelector(".overview");
+    overviewDisplay.style.display = "grid";
+    var travelAdviceDisplay = document.querySelector(".advice");
+    travelAdviceDisplay.style.display = "none";
+    var neighboursDisplay = document.querySelector(".neighbours");
+    neighboursDisplay.style.display = "none";
+    var weatherDisplay = document.querySelector(".weather");
+    weatherDisplay.style.display = "none";
+}
+
+function showAdvice() {
+    var overviewDisplay = document.querySelector(".overview");
+    overviewDisplay.style.display = "none";
+    var travelAdviceDisplay = document.querySelector(".advice");
+    travelAdviceDisplay.style.display = "grid";
+    var neighboursDisplay = document.querySelector(".neighbours");
+    neighboursDisplay.style.display = "none";
+    var weatherDisplay = document.querySelector(".weather");
+    weatherDisplay.style.display = "none";
+}
+
+function showNeighbours() {
+    var overviewDisplay = document.querySelector(".overview");
+    overviewDisplay.style.display = "none";
+    var travelAdviceDisplay = document.querySelector(".advice");
+    travelAdviceDisplay.style.display = "none";
+    var neighboursDisplay = document.querySelector(".neighbours");
+    neighboursDisplay.style.display = "grid";
+    var weatherDisplay = document.querySelector(".weather");
+    weatherDisplay.style.display = "none";
+}
+
+function showWeather() {
+    var overviewDisplay = document.querySelector(".overview");
+    overviewDisplay.style.display = "none";
+    var travelAdviceDisplay = document.querySelector(".advice");
+    travelAdviceDisplay.style.display = "none";
+    var neighboursDisplay = document.querySelector(".neighbours");
+    neighboursDisplay.style.display = "none";
+    var weatherDisplay = document.querySelector(".weather");
+    weatherDisplay.style.display = "grid";
+}
 
 // //saved countries box
 
@@ -50,7 +91,7 @@ function display_clock() {
 
 var departureDate = "2021-06-22";
 //var destinationPlace = "anywhere";
-var resultsLocale = "en-US"; 
+var resultsLocale = "en-US";
 var currency = "USD";
 var marketCountry = "US";
 var limitedQuotes = [];
@@ -104,7 +145,7 @@ var formSubmit = document.querySelector("#submit");
 
 
 
-formSubmit.addEventListener('click',function(event){
+formSubmit.addEventListener('click', function (event) {
     event.preventDefault();
     var pointOfOrigin = document.getElementById("ptOfOrigin").value;
     console.log(pointOfOrigin);
@@ -120,7 +161,7 @@ formSubmit.addEventListener('click',function(event){
     console.log(returnDate);
     var destinationPlace = document.getElementById("flying-to").value
     console.log(destinationPlace);
-    if(destinationPlace){
+    if (destinationPlace) {
         // var destinationCountry = destinationPlace.split(" ")
         // for (let i = 0; i < destinationCountry.length; i++) {
         //     destinationCountry[i] = destinationCountry[i][0].toUpperCase() + destinationCountry[i].substr(1);
@@ -135,19 +176,19 @@ formSubmit.addEventListener('click',function(event){
         //     }
         // } 
     }
-    else{
+    else {
         destinationPlace = "anywhere"
         console.log(destinationPlace);
-        
+
     }
 
-    
-
-    
 
 
-    
-    
+
+
+
+
+
 
 
     fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/" + marketCountry + "/" + currency + "/" + resultsLocale + "/" + pointOfOrigin + "/" + destinationPlace + "/" + departureDate + "/" + returnDate, {
@@ -196,7 +237,7 @@ formSubmit.addEventListener('click',function(event){
             console.error(err);
         })
 
-    
+
 })
 
 
@@ -210,11 +251,11 @@ formSubmit.addEventListener('click',function(event){
 //         alert("clear results please")
 //         //flightDisplay = document.getElementById("flight-display").innerHTML = "";
 //     }
-   
+
 
 // }
 
-    
+
 
 
 var tripDates = function () {
@@ -302,19 +343,19 @@ var flightCarriers = function () {
         else {
             console.log("different carriers")
             for (var n = 0; n < carriers.length; n++) {
-                if (carrierId === carriers[n].CarrierId){
+                if (carrierId === carriers[n].CarrierId) {
                     airlineNameOut = carriers[n].Name
                     console.log(airlineNameOut + " Carrier Name ");
                 }
-                if(carrierIdIn === carriers[n].CarrierId){
+                if (carrierIdIn === carriers[n].CarrierId) {
                     airlineNameIn = carriers[n].Name
                     console.log(airlineNameIn + " Carrier Name In")
-                
+
                     var airlinesli = document.createElement("li");
                     airlinesli.setAttribute("style", "height: 150px")
                     airlines.append(airlinesli);
                     airlinesli.innerHTML = airlineNameOut + "/<br/>" + airlineNameIn;
-                }   
+                }
             }
         }
     }
@@ -368,12 +409,12 @@ var countryChoice = function (event) {
     iconImage = document.createElement("i");
     iconContainer.append(iconImage)
     iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
-    
-    
-    
 
-    
-    
+
+
+
+
+
 
 
     fetchTravelApi();
@@ -414,26 +455,25 @@ function fetchTravelApi() {
 
             //display currency
         });
-        travelAPI_2(countryOfTravel)
+    travelAPI_2(countryOfTravel)
 }
 //api to get the country flags etc
-function travelAPI_2(countryOfTravel)
-{
- var travelApi2 = 'https://restcountries.eu/rest/v2/name/'+countryOfTravel;
- fetch(travelApi2)
- .then(function (response) {
-     if (!response || !response.ok) {
-         throw new Error('Opps! No response');
-     };
-     return response.json();
- })
- .then(function (responseStr) {
-    //display flag
-    console.log(responseStr[0].flag);
-    // will use this to display the flag
-   /* var flag= document.getElementById("flag");
-    flag.setAttribute("src",responseStr[0].flag)*/
+function travelAPI_2(countryOfTravel) {
+    var travelApi2 = 'https://restcountries.eu/rest/v2/name/' + countryOfTravel;
+    fetch(travelApi2)
+        .then(function (response) {
+            if (!response || !response.ok) {
+                throw new Error('Opps! No response');
+            };
+            return response.json();
+        })
+        .then(function (responseStr) {
+            //display flag
+            console.log(responseStr[0].flag);
+            // will use this to display the flag
+            /* var flag= document.getElementById("flag");
+             flag.setAttribute("src",responseStr[0].flag)*/
 
- });
- 
+        });
+
 }

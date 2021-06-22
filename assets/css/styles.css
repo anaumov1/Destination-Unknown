@@ -125,8 +125,12 @@ color:white;
 }
 /*Footer*/
 .footer-info {
-    background: linear-gradient(90deg,rgb(41, 42, 42) 0%, rgb(125, 125, 126) 100%);
+    background: linear-gradient(90deg,rgb(41, 42, 42) 0%, rgba(51, 121, 124) 100%);
     color:white;
+    position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
 }
 .footer {
     padding: 15px;
@@ -171,4 +175,58 @@ color:white;
   .fa-instagram {
     background: #125688;
     color: white;
+  }
+
+  /*HTML 2*/
+.countries {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/hero-bg.jpg");  
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 80%; 
+}
+.countries h1 {
+    color:khaki;
+    font-weight: bolder;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+  .overview {
+    background:linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(112, 162, 243) 100%);
+      display: none;
+      padding-left: 3rem;
+  }
+
+  .overview p {
+      padding: 0.5rem;
+      font-weight: bold;
+  }
+
+  .advice {
+    background:linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(235, 212, 81) 100%);
+    display: none;
+    padding-left: 3rem;
+  }
+
+  .neighbours {
+    background:linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(141, 231, 132) 100%);
+    display:none;
+    padding-left: 3rem;
+  }
+
+  .neighbours ul li {
+    padding: 0.5rem;
+    font-weight: bold;
+    border-bottom: solid 1px rgb(58, 58, 58, 0.5);
+  }
+
+  .weather {
+    background:linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(137, 230, 230) 100%);
+    display:none;
+    padding-left: 3rem;
+  }
+
+  .opt-menu {
+    background: linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(123, 126, 126) 100%);
   }
