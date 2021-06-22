@@ -38,8 +38,8 @@ setInterval(clock, 1000);
 //locale:en-US
 //originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
 
-var departureDate = "2021-06-21";
-//var destinationPlace = "anywhere";
+var departureDate = "2021-06-22";
+var destinationPlace = "anywhere";
 var resultsLocale = "en-US"; 
 var currency = "USD";
 var marketCountry = "US";

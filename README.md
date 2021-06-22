@@ -26,6 +26,7 @@
 * SkyScanner Travel API via Rapid API
 * Travel Briefing API
 * REST Countries API
+* Exchange Rate API
 
 ## Future Development:
 * CURRENTLY, users are defined to large Texas markets. 
