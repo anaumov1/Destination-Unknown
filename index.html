@@ -1,14 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+​
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    ​
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Open+Sans&family=Playfair+Display+SC&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <title>Destination Unknown</title>
 </head>
-<body>
-    <h1>our first projec</h1>
-    <script src = "./assets/js/script.js"></script>
+​
 
+<body>
+    <div class="columns is-multiline is-gapless">
+        <!--navbar-->
+        <div class="column is-9 navbar-brand is-gapless">
+            <!--logo and name-->
+            <!--<div class="columns is-gapless is-vcentered">-->
+            <div class="navbar-item is-size-3 has-text-weight-bold">
+                <i class="fas fa-plane-departure"></i>
+                <span>Destination Unknown</span>
+            </div>
+        </div>
+        <!--local time-->
+        <div class="column is-3  navbar-brand navbar-end is-gapless">
+            <div class="navbar-item is-size-5" id="clock"> Local Time: </div>
+        </div>
+
+        <!--hero section-->
+        <div class="hero column is-full">
+            <!--columns to split box into two parts-->
+            <div id="hero-style" class="columns">
+                <!--column one - right side - form for inputs -->
+                <div class="column is-one-third form">
+                    <h2 class="is-size-5 has-text-weight-bold"> Search All Flights</h2>
+                    <label class="is-grey-dark">From</label>
+                    </br>
+                    <!--dropdown for home airport-->
+                    <div class="relative inline-flex">
+                        <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
+                            <path
+                                d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                                fill="#648299" fill-rule="nonzero" />
+                        </svg>
+                        <select
+                            class="border border-gray-300 rounded text-gray-700  h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+                            id="ptOfOrigin">
+                            <option>Choose home airport</option>
+                            <option value="DFWA-sky">"DFW" Dallas Fort-Worth</option>
+                            <option value="IAH-sky">"IAH" Houston</option>
+                            <option value="AUM-sky">"AUM" Austin</option>
+                        </select>
+                    </div>
+                    </br>
+                    <label>To</label>
+                    <input id="flying-to" class="input" type="text" placeholder="Leave blank if you feel adventurous!"
+                        value="anywhere">
+
+                    <!--calendar form - departure-->
+                    <form action="/action_page.php">
+                        <label class="mt-12" for="departure-date">Leaving on</label>
+                        <input class="text-gray-600 mt-2 rounded h-10 " type="date" id="departure-date"
+                            name="departure-date">
+
+                    </form>
+                    <!--calendar form - returning-->
+                    <form action="/action_page.php">
+                        <label class="mt-12" for="return-date">Returning on</label>
+                        <input class="text-gray-600 mt-2 rounded h-10" type="date" id="return-date" name="return-date">
+                    </form>
+
+                    <button class="button is-warning mt-2 ml-36" id="submit">Let's go</button>
+
+                </div>
+                <!--column two - left side - hero text-->
+                <div class="column hero-text ">
+                    <h2>For when you just want </br> to get away!</h2>
+                </div>
+            </div>
+        </div>
+        ​
+        <!--serch info box-->
+        <div class="column is-full" id="search-info-box">
+            <div class="columns gray">
+                <!--button for currency exchange-->
+                <div class="column is-one-fifth">
+                    <button class="button is-warning btn-hover" id="currency">
+                        <div>
+                            <a href ="./currency-exchange-calculator/index.html">Currency</a><span class="icon is-small"><ion-icon name="logo-euro"></ion-icon></span><br/>
+                        </div>
+                        <span class="hover-text has-text-weight-semibold">Currency Exchange</span>
+                    </button>
+                </div>
+                <!--heading to - returning on display-->
+                <div class="column is-three-fifths">
+                    <div class="columns">
+                        <!--div for to and from locations-->
+                        <div class="column text-xl font-semibold">Heading to: <span id="from-to"></span><span
+                                id="icon"><i style='font-size:24px' class='fas'>&#xf35a;</i></span></div>
+                        <!--div for return date-->
+                        <div class="column text-xl font-semibold">Returning on: <span id="return-date-info"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Search Results BOX will appear after search button clicked-->
+        <div class="column is-full" id="search-results-box">
+            <div class="columns">
+                <!--to re-style results box use  class .result or id #search-results-box-->
+                <div class="column results is-three-fifths is-offset-one-fifth">
+                    <h2 class="is-size-4 has-text-weight-bold">Flight results</h2>
+                    <!--row to insert fetched data-->
+                    <div class="row">
+                        <!--container number one - lane one - for data components-->
+                        <div class="columns" id="flight-display">
+                            <!--airline-->
+                            <div class="column is-one-quarter serch-component">
+                                <ul id="airlines">
+                                </ul>
+                            </div>
+                            <!--XYZ -YZX-->
+                            <div class="column is-one-quarter serch-component">
+                                <ul id="destination">
+                                </ul>
+                            </div>
+                            <!--time and date-->
+                            <div class="column is-one-quarter serch-component">
+                                <ul id="dates">
+                                </ul>
+                            </div>
+                            <!--price-->
+                            <div class="column is-one-quarter serch-component">
+                                <ul id="pricing">
+                                </ul>
+                            </div>
+                        </div> ​
+                    </div>
+                </div>
+            </div>
+        </div>
+        ​
+        <!--Saved Cuontries box-->
+        <div class="column is-full" id="saved-countries"></div>
+        <!--Footer-->
+        <div class="column is-full">
+            <footer class="footer-info-2 columns footer">
+                <div class="column is-10 is-size-6 has-text-weight-semibold contact has-text-centered">
+                    Connect with us
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-google"></a>
+                    <a href="#" class="fa fa-youtube"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://kit.fontawesome.com/542d56e2f0.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
+​
+
 </html>
