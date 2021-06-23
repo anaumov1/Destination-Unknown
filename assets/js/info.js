@@ -19,6 +19,7 @@ function showAdvice() {
     overviewDisplay.style.display = "none";
     var travelAdviceDisplay = document.querySelector(".advice");
     travelAdviceDisplay.style.display = "grid";
+
     var neighboursDisplay = document.querySelector(".neighbours");
     neighboursDisplay.style.display = "none";
     var weatherDisplay = document.querySelector(".weather");
@@ -47,7 +48,7 @@ function showWeather() {
     weatherDisplay.style.display = "grid";
 }
 
-function fetchTravelApi() {
+function DisplayInfo() {
   
     var travelAPI = "https://travelbriefing.org/" + country + "?format=json";
 
@@ -61,9 +62,9 @@ function fetchTravelApi() {
         .then(function (responseStr) {
             // display travel advice
          //   console.log("advise:" + responseStr.advise.UA.advise)//FROM 
-//display vaccination 
-vaccination(responseStr)
-      
+            //display vaccination 
+            vaccination(responseStr);
+
             //display weather
             var currentMonth = moment().format('MMMM'); // returns name eg. January      
             var temp = responseStr.weather[currentMonth].tAvg;
@@ -71,7 +72,7 @@ vaccination(responseStr)
            // console.log(temp + '°C');
 
             //display capital
-            console.log(responseStr)
+           // console.log(responseStr)
         });
 }
 
@@ -99,23 +100,24 @@ var DisplayFlag=function (countryOfTravel) {
         });
 
 }
-var vaccination =function(responseStr)
+function vaccination(responseStr)
 {
       //display required vaccination
       if (responseStr.vaccinations.length === 0) {
-        //    console.log("There are no vaccinations for " + country)
+           console.log("There are no vaccinations for " + country)
         }
 
         for (let i = 0; i < responseStr.vaccinations.length; i++) {
             responseStr.vaccinations
-       //     console.log("name: " + responseStr.vaccinations[i].name)
+          console.log("name: " + responseStr.vaccinations[i].name)
          //   console.log("message: " + responseStr.vaccinations[i].message)
         }
 }
+
 window.onload = function(){
  //added flag
  DisplayFlag(country)
- fetchTravelApi();
+ DisplayInfo();
 };
        
 
