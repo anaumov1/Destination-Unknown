@@ -1,4 +1,5 @@
 //declare variables
+//originplace: "IAH-sky" "AUM-sky", "DWFA-sky"
 
 var storageObject;
 var destinationPlace = "anywhere";
@@ -132,75 +133,6 @@ function showWeather() {
 }
 
 
-//fetch skyscanner data
-//search variables:
-//country(market country user is in): US
-//current: USD
-//destinationplace: default anywhere (look up additional places)
-//if input matches a market, run fetch, else error "market not supported"
-//departureDate:  yyyy-mm-dd, yyyy-mm  (departure Date)
-//returnDate: yyyy-mm-dd, yyyy-mm (return Date)
-//locale:en-US
-//originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
-
-// var departureDate = "2021-06-22";
-var destinationPlace = "anywhere";
-var resultsLocale = "en-US"; 
-var currency = "USD";
-var marketCountry = "US";
-var limitedQuotes = [];
-var Places = [];
-var destinationId;
-var destinationId;
-var originId;
-var carrierId;
-var carrierIdIn;
-var carriers;
-var quotes;
-var price;
-var dateOfDeparture;
-var travelDestinationOut;
-var travelCountryOut;
-var departurePointOut;
-var departureCountryOut;
-var dayOfReturn;
-var airlineNameOut;
-var airlineNameIn;
-var countryOfTravel;
-var allPlaces;
-var skyScannerCountryCode;
-var skyScannerStationCode;
-var returnDate;
-
-// //get places to compare against search
-// fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/DFWA-sky/anywhere/anytime/anytime", {
-//     "method": "GET",
-//     "headers": {
-//         "x-rapidapi-key": "9f26d8ac82msh2648fcef3be4079p1494e7jsn9b0c1ca6e817",
-//         "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
-//     }
-// })
-//     .then(function (results) {
-//         return results.json();
-//     })
-//     .then(function(results) {
-//     allPlaces = results.Places
-//     console.log(allPlaces);
-// })
-
-
-
-var flightDisplay = document.getElementById("flight-display")
-var pricing = document.querySelector("#pricing");
-var dates = document.querySelector("#dates");
-var destination = document.querySelector("#destination");
-var airlines = document.querySelector("#airlines")
-var formSubmit = document.querySelector("#submit");
-var previousSearchContainer = document.querySelector("#saved-countries");
-
-
-//originplace: "IAH-sky" "AUM-sky", "DWFA-sky"
-
 // listen to submit button on form
 formSubmit.addEventListener('click', function (event) {
     event.preventDefault();
@@ -226,35 +158,17 @@ formSubmit.addEventListener('click', function (event) {
     //grab destination( current default: anywhere)
     var destinationPlace = document.getElementById("flying-to").value
     console.log(destinationPlace);
-    // if(destinationPlace){
-    //     // var destinationCountry = destinationPlace.split(" ")
-    //     // for (let i = 0; i < destinationCountry.length; i++) {
-    //     //     destinationCountry[i] = destinationCountry[i][0].toUpperCase() + destinationCountry[i].substr(1);
-    //     //     destinationPlace = destinationCountry.join(" ");
-    //     // }
-    //     // for(var i = 0; i< allPlaces.length; i++){
-    //     //     if(destinationPlace === allPlaces[i].Name){
-    //     //         skyScannerCountryCode = allPlaces[i].SkyscannerCode;
-    //     //         destinationPlace = skyScannerCountryCode
-    //     //         console.log(destinationPlace);
 
-    //     //     }
-    //     // } 
-    // }
-    // else{
-    //     destinationPlace = "anywhere"
-    //     console.log(destinationPlace);
-        
-    // }
-
-
-
-
-
-
-
-
-
+    //fetch skyscanner data
+    //search variables:
+    //country(market country user is in): US
+    //current: USD
+    //destinationplace: default anywhere (look up additional places)
+    //if input matches a market, run fetch, else error "market not supported"
+    //departureDate:  yyyy-mm-dd, yyyy-mm  (departure Date)
+    //returnDate: yyyy-mm-dd, yyyy-mm (return Date)
+    //locale:en-US
+    //originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
     
 
     fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/" + marketCountry + "/" + currency + "/" + resultsLocale + "/" + pointOfOrigin + "/" + destinationPlace + "/" + departureDate + "/" + returnDate, {
@@ -305,22 +219,6 @@ formSubmit.addEventListener('click', function (event) {
 
 
 })
-
-
-//function to clear results if multiple queries are performed at once before a reload of page. NEED TO GET THIS TO WORK!!. IT currently appends the fligths to bottom of the flight-display container.
-// var clearResults = function(){
-//     if(flightDisplay === " " || null){
-//         alert("no results yet");
-//         return;
-//     }
-//     else{
-//         alert("clear results please")
-//         //flightDisplay = document.getElementById("flight-display").innerHTML = "";
-//     }
-
-
-// }
-
 
 
 var tripDates = function () {
@@ -461,19 +359,11 @@ var countryChoice = function (event) {
     var btnTarget = event.target.attributes[1].value;
     btnTarget = btnTarget.split("-")[1];
     console.log(btnTarget)
-    // console.log(CountryOut[btnTarget])
-    countryOfTravel = CountryOut[btnTarget]
-    var previousSearchBtn = document.createElement("button");
-    previousSearchBtn.setAttribute("class", "button is-warning select-button previousSearch");
-    previousSearchBtn.style.marginLeft = "20px";
-    previousSearchBtn.style.marginRight = "20px";
-    previousSearchBtn.innerHTML = countryOfTravel;
-    previousSearchContainer.append(previousSearchBtn);
-
-    
+        
     //set country of travel to value 
     countryOfTravel = CountryOut[btnTarget]  
-    
+
+
     //check to see if storageObject exists and if it contains the currently selected country of Travel
     if(storageObject){
         var contains = storageObject.includes(countryOfTravel);
@@ -502,7 +392,7 @@ var countryChoice = function (event) {
         console.log(storageObject);
         localStorage.setItem('storageObject', JSON.stringify(storageObject));
     }
-    
+        
     //populate from-to banner
     console.log(countryOfTravel);
     var fromTo = document.querySelector("#from-to");
