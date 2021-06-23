@@ -77,7 +77,7 @@ function DisplayInfo() {
 }
 
 //api to get the country flags etc
-var DisplayFlag=function (countryOfTravel) {
+function OverView (countryOfTravel) {
     var travelApi2 = 'https://restcountries.eu/rest/v2/name/' + countryOfTravel;
     fetch(travelApi2)
         .then(function (response) {
@@ -88,7 +88,7 @@ var DisplayFlag=function (countryOfTravel) {
         })
         .then(function (responseStr) {
             //display flag
-            console.log(responseStr[0].flag);
+            console.log(responseStr[0]);
             // will use this to display the flag
             var flagImg = document.createElement('img');
             var flagContainer = document.getElementById("flag")
@@ -117,6 +117,7 @@ function vaccination(responseStr)
 window.onload = function(){
  //added flag
  DisplayFlag(country)
+ //display all the required info
  DisplayInfo();
 };
        
