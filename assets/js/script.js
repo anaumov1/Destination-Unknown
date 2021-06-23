@@ -46,6 +46,9 @@ window.onload = function(){
     loadCountries();
 };
 
+function linkInfoPage() {
+    window.location.href = "countries.html";
+}
 
 // load searches from local storage
 var loadCountries = function () {
@@ -64,7 +67,7 @@ var loadCountries = function () {
         //iterate through storageObject and create buttons for each previously searched country
         for(var i = 0; i < storageObject.length; i++){
             var previousSearchBtn = document.createElement("button");
-            previousSearchBtn.setAttribute("class", "button is-info select-button previousSearch");
+            previousSearchBtn.setAttribute("class", "button is-success  previousSearch");
             previousSearchBtn.style.marginLeft = "20px";
             previousSearchBtn.style.marginRight = "20px";
             previousSearchBtn.setAttribute("id",i);
@@ -78,7 +81,7 @@ var loadCountries = function () {
 
 
 var addEventListenerToHistory = function () {
-    var allHistoryBtns = document.querySelectorAll(".is-info")
+    var allHistoryBtns = document.querySelectorAll(".is-success")
     for (var e = 0; e < allHistoryBtns.length; e++) {
         allHistoryBtns[e].addEventListener("click", selectCountry)
     }
@@ -91,14 +94,15 @@ var selectCountry = function (event) {
     // btnTargetHistory = event.target.firstChild.data;
     btnTargetHistory = event.target.innerHTML;
     console.log(btnTargetHistory);
-    if(btnTargetHistory === null){
+    if(btnTargetHistory === null || undefined){
         btnTargetHistory = event.target.firstChild.data;
         console.log(btnTargetHistory);
     }
     console.log(btnTargetHistory);
     countryOfTravel = btnTargetHistory; 
     // debugger;
-    fetchTravelApi();  
+    //fetchTravelApi(); 
+    linkInfoPage(); 
 }  
 
 
@@ -121,49 +125,7 @@ display_c5()
 
 
 
-function showOverview() {
-    var overviewDisplay = document.querySelector(".overview");
-    overviewDisplay.style.display = "grid";
-    var travelAdviceDisplay = document.querySelector(".advice");
-    travelAdviceDisplay.style.display = "none";
-    var neighboursDisplay = document.querySelector(".neighbours");
-    neighboursDisplay.style.display = "none";
-    var weatherDisplay = document.querySelector(".weather");
-    weatherDisplay.style.display = "none";
-}
 
-function showAdvice() {
-    var overviewDisplay = document.querySelector(".overview");
-    overviewDisplay.style.display = "none";
-    var travelAdviceDisplay = document.querySelector(".advice");
-    travelAdviceDisplay.style.display = "grid";
-    var neighboursDisplay = document.querySelector(".neighbours");
-    neighboursDisplay.style.display = "none";
-    var weatherDisplay = document.querySelector(".weather");
-    weatherDisplay.style.display = "none";
-}
-
-function showNeighbours() {
-    var overviewDisplay = document.querySelector(".overview");
-    overviewDisplay.style.display = "none";
-    var travelAdviceDisplay = document.querySelector(".advice");
-    travelAdviceDisplay.style.display = "none";
-    var neighboursDisplay = document.querySelector(".neighbours");
-    neighboursDisplay.style.display = "grid";
-    var weatherDisplay = document.querySelector(".weather");
-    weatherDisplay.style.display = "none";
-}
-
-function showWeather() {
-    var overviewDisplay = document.querySelector(".overview");
-    overviewDisplay.style.display = "none";
-    var travelAdviceDisplay = document.querySelector(".advice");
-    travelAdviceDisplay.style.display = "none";
-    var neighboursDisplay = document.querySelector(".neighbours");
-    neighboursDisplay.style.display = "none";
-    var weatherDisplay = document.querySelector(".weather");
-    weatherDisplay.style.display = "grid";
-}
 
 
 // listen to submit button on form
@@ -423,7 +385,7 @@ var countryChoice = function (event) {
 
         //create button with value of countryOfTravel
         var previousSearchBtn = document.createElement("button");
-        previousSearchBtn.setAttribute("class", "button is-info select-button previousSearch");
+        previousSearchBtn.setAttribute("class", "button is-success  previousSearch");
         previousSearchBtn.style.marginLeft = "20px";
         previousSearchBtn.style.marginRight = "20px";
         previousSearchBtn.innerHTML = countryOfTravel;
@@ -454,63 +416,8 @@ var countryChoice = function (event) {
     iconImage = document.createElement("i");
     iconContainer.append(iconImage)
     iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
-
-    fetchTravelApi();
-
+    localStorage.setItem("selected-country",countryOfTravel);
+    // window.open("countries.html","_self")
+    linkInfoPage(); 
 }
 
-function fetchTravelApi() {
-    country = countryOfTravel;
-    var travelAPI = "https://travelbriefing.org/" + country + "?format=json";
-
-    fetch(travelAPI)
-        .then(function (response) {
-            if (!response || !response.ok) {
-                throw new Error('Opps! No response');
-            };
-            return response.json();
-        })
-        .then(function (responseStr) {
-            // display travel advice
-            console.log("advise:" + responseStr.advise.UA.advise)//FROM AUSTRALIA
-
-            //display required vaccination
-            if (responseStr.vaccinations.length === 0) {
-                console.log("There are no vaccinations for " + country)
-            }
-
-            for (let i = 0; i < responseStr.vaccinations.length; i++) {
-                responseStr.vaccinations
-                console.log("name: " + responseStr.vaccinations[i].name)
-                console.log("message: " + responseStr.vaccinations[i].message)
-            }
-            //display weather
-            var currentMonth = moment().format('MMMM'); // returns name eg. January      
-            var temp = responseStr.weather[currentMonth].tAvg;
-            temp = parseInt(temp).toFixed(1);
-            console.log(temp + '°C');
-
-            //display currency
-        });
-    travelAPI_2(countryOfTravel)
-}
-//api to get the country flags etc
-function travelAPI_2(countryOfTravel) {
-    var travelApi2 = 'https://restcountries.eu/rest/v2/name/' + countryOfTravel;
-    fetch(travelApi2)
-        .then(function (response) {
-            if (!response || !response.ok) {
-                throw new Error('Opps! No response');
-            };
-            return response.json();
-        })
-        .then(function (responseStr) {
-            //display flag
-            console.log(responseStr[0].flag);
-            // will use this to display the flag
-            /* var flag= document.getElementById("flag");
-             flag.setAttribute("src",responseStr[0].flag)*/
-
-        });
-
-}
