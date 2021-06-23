@@ -93,12 +93,27 @@ function OverView (countryOfTravel) {
             capital(responseStr);
             //display region
             region(responseStr);
+            //display languages
+            languages(responseStr);
 
             console.log(responseStr[0]);
             // will use this to display the flag
         });
 
 
+}
+function languages(responseStr)
+{
+         var langEl=document.getElementById("language");
+           for (let i = 0; i < responseStr[0].languages.length; i++)
+            {
+                langEl.textContent+="\t"+responseStr[0].languages[i].name
+//to add ',' after every language name except the last one
+                if(responseStr[0].languages.length>0 && i <responseStr[0].languages.length-1)
+                {
+                    langEl.textContent+=","
+                }
+       }
 }
 function region(responseStr)
 {
