@@ -110,7 +110,7 @@ function vaccination(responseStr)
         for (let i = 0; i < responseStr.vaccinations.length; i++) {
             responseStr.vaccinations
           console.log("name: " + responseStr.vaccinations[i].name)
-         //   console.log("message: " + responseStr.vaccinations[i].message)
+          console.log("message: " + responseStr.vaccinations[i].message)
         }
 }
 
