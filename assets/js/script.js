@@ -28,6 +28,7 @@ var allPlaces;
 var skyScannerCountryCode;
 var skyScannerStationCode;
 var returnDate;
+var btnTargetHistory;
 
 var previousSearchContainer = document.querySelector("#saved-countries");
 var flightDisplay = document.getElementById("flight-display")
@@ -71,6 +72,7 @@ var loadCountries = function () {
             previousSearchContainer.append(previousSearchBtn);
         }
         addEventListenerToHistory()
+        
     }
 };
 
@@ -86,12 +88,17 @@ var addEventListenerToHistory = function () {
 
 var selectCountry = function (event) {
     console.log(event)
-    // //target event
-    var btnTarget = event.target.firstChild.data;
-    console.log(btnTarget)
-    country = btnTarget;
-    console.log(country);
-
+    // btnTargetHistory = event.target.firstChild.data;
+    btnTargetHistory = event.target.innerHTML;
+    console.log(btnTargetHistory);
+    if(btnTargetHistory === null){
+        btnTargetHistory = event.target.firstChild.data;
+        console.log(btnTargetHistory);
+    }
+    console.log(btnTargetHistory);
+    countryOfTravel = btnTargetHistory; 
+    // debugger;
+    fetchTravelApi();  
 }  
 
 
@@ -173,6 +180,15 @@ formSubmit.addEventListener('click', function (event) {
     var departureDateFormat = moment(departureDate).format("YYYY/MM/DD");
     console.log(departureDateFormat);
     console.log(departureDate);
+
+    // let today = new Date().toLocaleDateString()
+    // console.log(today);
+    // console.log(departureDate);
+
+    // //validate departureDate
+    // if(departureDate < today){
+    //     alert("date in the past");
+    // }
 
     //grab returnDate from calendar on form
     returnDate = document.querySelector("#return-date").value;
@@ -413,6 +429,8 @@ var countryChoice = function (event) {
         previousSearchBtn.innerHTML = countryOfTravel;
         previousSearchContainer.append(previousSearchBtn);
         addEventListenerToHistory();
+
+        
 
         //new countryOfTravel is added to the storageObject which is then set to localStorage
         storageObject.push(countryOfTravel);
