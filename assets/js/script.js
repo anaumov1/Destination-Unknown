@@ -46,6 +46,9 @@ window.onload = function(){
     loadCountries();
 };
 
+function linkInfoPage() {
+    window.location.href = "countries.html";
+}
 
 // load searches from local storage
 var loadCountries = function () {
@@ -98,7 +101,8 @@ var selectCountry = function (event) {
     console.log(btnTargetHistory);
     countryOfTravel = btnTargetHistory; 
     // debugger;
-    fetchTravelApi();  
+    //fetchTravelApi(); 
+    linkInfoPage(); 
 }  
 
 
@@ -413,6 +417,7 @@ var countryChoice = function (event) {
     iconContainer.append(iconImage)
     iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
     localStorage.setItem("selected-country",countryOfTravel);
-    window.open("countries.html","_self")
+    // window.open("countries.html","_self")
+    linkInfoPage(); 
 }
 
