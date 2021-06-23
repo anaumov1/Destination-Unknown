@@ -11,8 +11,7 @@ function showOverview() {
     neighboursDisplay.style.display = "none";
     var weatherDisplay = document.querySelector(".weather");
     weatherDisplay.style.display = "none";
-    //added flag
-    travelAPI_2(country)
+
 }
 
 function showAdvice() {
@@ -61,30 +60,23 @@ function fetchTravelApi() {
         })
         .then(function (responseStr) {
             // display travel advice
-            console.log("advise:" + responseStr.advise.UA.advise)//FROM 
-
-            //display required vaccination
-            if (responseStr.vaccinations.length === 0) {
-                console.log("There are no vaccinations for " + country)
-            }
-
-            for (let i = 0; i < responseStr.vaccinations.length; i++) {
-                responseStr.vaccinations
-                console.log("name: " + responseStr.vaccinations[i].name)
-                console.log("message: " + responseStr.vaccinations[i].message)
-            }
+         //   console.log("advise:" + responseStr.advise.UA.advise)//FROM 
+//display vaccination 
+vaccination(responseStr)
+      
             //display weather
             var currentMonth = moment().format('MMMM'); // returns name eg. January      
             var temp = responseStr.weather[currentMonth].tAvg;
             temp = parseInt(temp).toFixed(1);
-            console.log(temp + '°C');
+           // console.log(temp + '°C');
 
-            //display currency
+            //display capital
+            console.log(responseStr)
         });
 }
+
 //api to get the country flags etc
-var travelAPI_2=function (countryOfTravel) {
-    alert("here")
+var DisplayFlag=function (countryOfTravel) {
     var travelApi2 = 'https://restcountries.eu/rest/v2/name/' + countryOfTravel;
     fetch(travelApi2)
         .then(function (response) {
@@ -107,7 +99,24 @@ var travelAPI_2=function (countryOfTravel) {
         });
 
 }
+var vaccination =function(responseStr)
+{
+      //display required vaccination
+      if (responseStr.vaccinations.length === 0) {
+        //    console.log("There are no vaccinations for " + country)
+        }
 
-    
+        for (let i = 0; i < responseStr.vaccinations.length; i++) {
+            responseStr.vaccinations
+       //     console.log("name: " + responseStr.vaccinations[i].name)
+         //   console.log("message: " + responseStr.vaccinations[i].message)
+        }
+}
+window.onload = function(){
+ //added flag
+ DisplayFlag(country)
+ fetchTravelApi();
+};
+       
 
-fetchTravelApi() 
+
