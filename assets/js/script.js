@@ -1,3 +1,74 @@
+//declare variables
+
+var storageObject;
+var destinationPlace = "anywhere";
+var resultsLocale = "en-US"; 
+var currency = "USD";
+var marketCountry = "US";
+var limitedQuotes = [];
+var destinationId;
+var destinationId;
+var originId;
+var carrierId;
+var carrierIdIn;
+var carriers;
+var quotes;
+var price;
+var dateOfDeparture;
+var travelDestinationOut;
+var travelCountryOut;
+var departurePointOut;
+var departureCountryOut;
+var dayOfReturn;
+var airlineNameOut;
+var airlineNameIn;
+var countryOfTravel;
+var allPlaces;
+var skyScannerCountryCode;
+var skyScannerStationCode;
+var returnDate;
+
+var previousSearchContainer = document.querySelector("#saved-countries");
+var flightDisplay = document.getElementById("flight-display")
+var pricing = document.querySelector("#pricing");
+var dates = document.querySelector("#dates");
+var destination = document.querySelector("#destination");
+var airlines = document.querySelector("#airlines")
+var formSubmit = document.querySelector("#submit");
+
+
+//onload of page, load countries
+window.onload = function(){
+    loadCountries();
+};
+
+// load searches from local storage
+var loadCountries = function () {
+    storageObject = JSON.parse(localStorage.getItem("storageObject"));
+    console.log(storageObject)
+    //if storageObject doesn't exist, initialize object
+    if(storageObject === null){
+        console.log("empty storage");
+        storageObject = [];
+    }
+    else{
+        console.log("loading storage");
+        storageObject = JSON.parse(localStorage.getItem("storageObject"));
+        console.log(storageObject);
+
+        //iterate through storageObject and create buttons for each previously searched country
+        for(var i = 0; i < storageObject.length; i++){
+            var previousSearchBtn = document.createElement("button");
+            previousSearchBtn.setAttribute("class", "button is-warning select-button previousSearch");
+            previousSearchBtn.style.marginLeft = "20px";
+            previousSearchBtn.style.marginRight = "20px";
+            previousSearchBtn.setAttribute("id",i);
+            previousSearchBtn.innerText = storageObject[i];
+            previousSearchContainer.append(previousSearchBtn);
+        }
+    }
+};
+
 function display_clock() {
     var x = new Date()
     var ampm = x.getHours() >= 12 ? ' PM' : ' AM';
@@ -12,6 +83,8 @@ function display_c5() {
     mytime = setTimeout('display_clock()', refresh)
 }
 display_c5()
+
+
 
 
 function showOverview() {
@@ -58,26 +131,6 @@ function showWeather() {
     weatherDisplay.style.display = "grid";
 }
 
-// //saved countries box
-
-// // load searches from local storage
-// var loadCountries = function () {
-//     countries = JSON.parse(localStorage.getItem("countries"));
-//     if (!countries) {
-//         countries = [];
-//     }
-//     $("#saved-countries").empty();
-
-//     countries.forEach(function (country) {
-//         $("#saved-countries").append("<button class='country-btn'>" + country + "</button>")
-//     })
-// }
-// // save searches to local storage
-// var saveCountries = function () {
-//     localStorage.setItem("countries", JSON.stringify(countries));
-// }
-
-
 
 //fetch skyscanner data
 //search variables:
@@ -85,112 +138,37 @@ function showWeather() {
 //current: USD
 //destinationplace: default anywhere (look up additional places)
 //if input matches a market, run fetch, else error "market not supported"
-//inboundpartialdate:  yyyy-mm-dd, yyyy-mm or default anytime (return date)
+//departureDate:  yyyy-mm-dd, yyyy-mm  (departure Date)
+//returnDate: yyyy-mm-dd, yyyy-mm (return Date)
 //locale:en-US
-//originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
+//originplace: "IAH-sky" "AUM-sky", "DWFA-sky"
 
-// var departureDate = "2021-06-22";
-var destinationPlace = "anywhere";
-var resultsLocale = "en-US"; 
-var currency = "USD";
-var marketCountry = "US";
-var limitedQuotes = [];
-var Places = [];
-var destinationId;
-var destinationId;
-var originId;
-var carrierId;
-var carrierIdIn;
-var carriers;
-var quotes;
-var price;
-var dateOfDeparture;
-var travelDestinationOut;
-var travelCountryOut;
-var departurePointOut;
-var departureCountryOut;
-var dayOfReturn;
-var airlineNameOut;
-var airlineNameIn;
-var countryOfTravel;
-var allPlaces;
-var skyScannerCountryCode;
-var skyScannerStationCode;
-var returnDate;
-
-// //get places to compare against search
-// fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/DFWA-sky/anywhere/anytime/anytime", {
-//     "method": "GET",
-//     "headers": {
-//         "x-rapidapi-key": "9f26d8ac82msh2648fcef3be4079p1494e7jsn9b0c1ca6e817",
-//         "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com"
-//     }
-// })
-//     .then(function (results) {
-//         return results.json();
-//     })
-//     .then(function(results) {
-//     allPlaces = results.Places
-//     console.log(allPlaces);
-// })
-
-
-
-var flightDisplay = document.getElementById("flight-display")
-var pricing = document.querySelector("#pricing");
-var dates = document.querySelector("#dates");
-var destination = document.querySelector("#destination");
-var airlines = document.querySelector("#airlines")
-var formSubmit = document.querySelector("#submit");
-var previousSearchContainer = document.querySelector("#saved-countries");
-
-
-
+// listen to submit button on form
 formSubmit.addEventListener('click', function (event) {
     event.preventDefault();
+
+    //grab value of ptOfOrigin from form (current default: IAH,AUM or DWFA)
     var pointOfOrigin = document.getElementById("ptOfOrigin").value;
     console.log(pointOfOrigin);
+
+    //grab departureDate from calendar on form
     var departureDate = document.querySelector("#departure-date").value;
     //formating date to YYYY/MM/DD
     var departureDateFormat = moment(departureDate).format("YYYY/MM/DD");
     console.log(departureDateFormat);
     console.log(departureDate);
+
+    //grab returnDate from calendar on form
     returnDate = document.querySelector("#return-date").value;
     //formating date to YYYY/MM/DD
     var returnDateFormat = moment(returnDate).format("YYYY/MM/DD");
     console.log(returnDateFormat);
     console.log(returnDate);
+
+    //grab destination( current default: anywhere)
     var destinationPlace = document.getElementById("flying-to").value
     console.log(destinationPlace);
-    // if(destinationPlace){
-    //     // var destinationCountry = destinationPlace.split(" ")
-    //     // for (let i = 0; i < destinationCountry.length; i++) {
-    //     //     destinationCountry[i] = destinationCountry[i][0].toUpperCase() + destinationCountry[i].substr(1);
-    //     //     destinationPlace = destinationCountry.join(" ");
-    //     // }
-    //     // for(var i = 0; i< allPlaces.length; i++){
-    //     //     if(destinationPlace === allPlaces[i].Name){
-    //     //         skyScannerCountryCode = allPlaces[i].SkyscannerCode;
-    //     //         destinationPlace = skyScannerCountryCode
-    //     //         console.log(destinationPlace);
-
-    //     //     }
-    //     // } 
-    // }
-    // else{
-    //     destinationPlace = "anywhere"
-    //     console.log(destinationPlace);
-        
-    // }
-
-
-
-
-
-
-
-
-
+    
 
     fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/" + marketCountry + "/" + currency + "/" + resultsLocale + "/" + pointOfOrigin + "/" + destinationPlace + "/" + departureDate + "/" + returnDate, {
         "method": "GET",
@@ -255,7 +233,6 @@ formSubmit.addEventListener('click', function (event) {
 
 
 // }
-
 
 
 
@@ -381,6 +358,7 @@ var pricingInformation = function () {
     addEventListenertoSelect();
 }
 
+
 var addEventListenertoSelect = function () {
     var allSelectBtns = document.querySelectorAll(".select-button")
     for (var e = 0; e < allSelectBtns.length; e++) {
@@ -392,19 +370,44 @@ var addEventListenertoSelect = function () {
 
 var countryChoice = function (event) {
     console.log(event)
+    //target event
     var btnTarget = event.target.attributes[1].value;
     btnTarget = btnTarget.split("-")[1];
-
     console.log(btnTarget)
-    // console.log(CountryOut[btnTarget])
-    countryOfTravel = CountryOut[btnTarget]
-    var previousSearchBtn = document.createElement("button");
-    previousSearchBtn.setAttribute("class", "button is-warning select-button previousSearch");
-    previousSearchBtn.style.marginLeft = "20px";
-    previousSearchBtn.style.marginRight = "20px";
-    previousSearchBtn.innerHTML = countryOfTravel;
-    previousSearchContainer.append(previousSearchBtn);
+    
+    //set country of travel to value 
+    countryOfTravel = CountryOut[btnTarget]  
+    
+    //check to see if storageObject exists and if it contains the currently selected country of Travel
+    if(storageObject){
+        var contains = storageObject.includes(countryOfTravel);
+        console.log(contains);
+    } 
+    
+    //if contains returns true, value already exists
+    if(contains){
+        console.log(contains);
+        console.log("value exists");
+    }
+    else{
+        //returns false, new value is added to storage and a button is created to contain the country name
+        console.log("adding new value");
 
+        //create button with value of countryOfTravel
+        var previousSearchBtn = document.createElement("button");
+        previousSearchBtn.setAttribute("class", "button is-warning select-button previousSearch");
+        previousSearchBtn.style.marginLeft = "20px";
+        previousSearchBtn.style.marginRight = "20px";
+        previousSearchBtn.innerHTML = countryOfTravel;
+        previousSearchContainer.append(previousSearchBtn);
+
+        //new countryOfTravel is added to the storageObject which is then set to localStorage
+        storageObject.push(countryOfTravel);
+        console.log(storageObject);
+        localStorage.setItem('storageObject', JSON.stringify(storageObject));
+    }
+    
+    //populate from-to banner
     console.log(countryOfTravel);
     var fromTo = document.querySelector("#from-to");
     fromTo.innerHTML = " " + travelDestinationOut;
@@ -412,23 +415,16 @@ var countryChoice = function (event) {
     var returnDateInfo = document.querySelector("#return-date-info");
     returnDateInfo.innerHTML = returnDate;
 
+    //create arrow icon
     var iconContainer = document.querySelector("#icon");
     iconImage = document.createElement("i");
     iconContainer.append(iconImage)
     iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
 
-
-
-
-
-
-
-
     fetchTravelApi();
 
 }
 
-//Fizza this is the variable you can use for your api. I'm just struggling to pull it out of countryChoice function
 function fetchTravelApi() {
     country = countryOfTravel;
     var travelAPI = "https://travelbriefing.org/" + country + "?format=json";
