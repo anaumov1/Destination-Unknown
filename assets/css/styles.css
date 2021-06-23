@@ -69,6 +69,20 @@ background-color: rgb(191, 204, 206);
 #return-date {
   background-color: rgb(191, 204, 206);
 }
+#saved-countries{
+    height: 200px;
+    margin: 20px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    
+}
+
+.previousSearch{
+    flex-grow: 1;
+    
+}
+
 
 .previousSearch{
     flex-grow: 1;
