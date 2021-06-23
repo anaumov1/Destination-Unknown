@@ -412,8 +412,7 @@ var countryChoice = function (event) {
     iconImage = document.createElement("i");
     iconContainer.append(iconImage)
     iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
-
-    fetchTravelApi();
+    localStorage.setItem("selected-country",countryOfTravel);
 
 }
 

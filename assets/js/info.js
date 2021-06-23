@@ -1,3 +1,7 @@
+//fetch the selected country
+country = localStorage.getItem("selected-country");
+alert(country)
+
 function showOverview() {
     var overviewDisplay = document.querySelector(".overview");
     overviewDisplay.style.display = "grid";
@@ -8,7 +12,7 @@ function showOverview() {
     var weatherDisplay = document.querySelector(".weather");
     weatherDisplay.style.display = "none";
     //added flag
-    travelAPI_2("Pakistan")
+    travelAPI_2(country)
 }
 
 function showAdvice() {
@@ -45,7 +49,7 @@ function showWeather() {
 }
 
 function fetchTravelApi() {
-    country = countryOfTravel;
+  
     var travelAPI = "https://travelbriefing.org/" + country + "?format=json";
 
     fetch(travelAPI)
@@ -57,7 +61,7 @@ function fetchTravelApi() {
         })
         .then(function (responseStr) {
             // display travel advice
-            console.log("advise:" + responseStr.advise.UA.advise)//FROM AUSTRALIA
+            console.log("advise:" + responseStr.advise.UA.advise)//FROM 
 
             //display required vaccination
             if (responseStr.vaccinations.length === 0) {
@@ -77,7 +81,6 @@ function fetchTravelApi() {
 
             //display currency
         });
-    travelAPI_2(countryOfTravel)
 }
 //api to get the country flags etc
 var travelAPI_2=function (countryOfTravel) {
@@ -107,3 +110,4 @@ var travelAPI_2=function (countryOfTravel) {
 
     
 
+fetchTravelApi() 
