@@ -91,7 +91,7 @@ var selectCountry = function (event) {
     // btnTargetHistory = event.target.firstChild.data;
     btnTargetHistory = event.target.innerHTML;
     console.log(btnTargetHistory);
-    if(btnTargetHistory === null){
+    if(btnTargetHistory === null || undefined){
         btnTargetHistory = event.target.firstChild.data;
         console.log(btnTargetHistory);
     }
