@@ -1,7 +1,7 @@
 //fetch the selected country
 country = localStorage.getItem("selected-country");
-alert(country)
-
+//display country name on top
+document.getElementById("country-name").textContent=country;
 function showOverview() {
     var overviewDisplay = document.querySelector(".overview");
     overviewDisplay.style.display = "grid";

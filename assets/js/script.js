@@ -413,6 +413,6 @@ var countryChoice = function (event) {
     iconContainer.append(iconImage)
     iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
     localStorage.setItem("selected-country",countryOfTravel);
-    window.open("countries.html")
+    window.open("countries.html","_self")
 }
 
