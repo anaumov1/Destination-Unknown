@@ -52,7 +52,7 @@ var travelAPI_2=function (countryOfTravel) {
             console.log(responseStr[0].flag);
             // will use this to display the flag
             var flagImg = document.createElement('img');
-            var flagContainer = document.getElementById("flag2")
+            var flagContainer = document.getElementById("flag")
             flagImg.setAttribute('src', responseStr[0].flag);
             flagImg.setAttribute('alt', 'add falf');
 
@@ -61,6 +61,6 @@ var travelAPI_2=function (countryOfTravel) {
         });
 
 }
-travelAPI_2("Pakistan")
+
     
 

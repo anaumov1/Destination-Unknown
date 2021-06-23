@@ -130,7 +130,8 @@ function showOverview() {
     neighboursDisplay.style.display = "none";
     var weatherDisplay = document.querySelector(".weather");
     weatherDisplay.style.display = "none";
-  
+    //added flag
+    travelAPI_2("Pakistan")
 }
 
 function showAdvice() {
