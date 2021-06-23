@@ -64,7 +64,7 @@ var loadCountries = function () {
         //iterate through storageObject and create buttons for each previously searched country
         for(var i = 0; i < storageObject.length; i++){
             var previousSearchBtn = document.createElement("button");
-            previousSearchBtn.setAttribute("class", "button is-info select-button previousSearch");
+            previousSearchBtn.setAttribute("class", "button is-success  previousSearch");
             previousSearchBtn.style.marginLeft = "20px";
             previousSearchBtn.style.marginRight = "20px";
             previousSearchBtn.setAttribute("id",i);
@@ -78,7 +78,7 @@ var loadCountries = function () {
 
 
 var addEventListenerToHistory = function () {
-    var allHistoryBtns = document.querySelectorAll(".is-info")
+    var allHistoryBtns = document.querySelectorAll(".is-success")
     for (var e = 0; e < allHistoryBtns.length; e++) {
         allHistoryBtns[e].addEventListener("click", selectCountry)
     }
@@ -423,7 +423,7 @@ var countryChoice = function (event) {
 
         //create button with value of countryOfTravel
         var previousSearchBtn = document.createElement("button");
-        previousSearchBtn.setAttribute("class", "button is-info select-button previousSearch");
+        previousSearchBtn.setAttribute("class", "button is-success  previousSearch");
         previousSearchBtn.style.marginLeft = "20px";
         previousSearchBtn.style.marginRight = "20px";
         previousSearchBtn.innerHTML = countryOfTravel;
