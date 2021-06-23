@@ -1,6 +1,49 @@
+function showOverview() {
+    var overviewDisplay = document.querySelector(".overview");
+    overviewDisplay.style.display = "grid";
+    var travelAdviceDisplay = document.querySelector(".advice");
+    travelAdviceDisplay.style.display = "none";
+    var neighboursDisplay = document.querySelector(".neighbours");
+    neighboursDisplay.style.display = "none";
+    var weatherDisplay = document.querySelector(".weather");
+    weatherDisplay.style.display = "none";
+    //added flag
+    travelAPI_2("Pakistan")
+}
 
+function showAdvice() {
+    var overviewDisplay = document.querySelector(".overview");
+    overviewDisplay.style.display = "none";
+    var travelAdviceDisplay = document.querySelector(".advice");
+    travelAdviceDisplay.style.display = "grid";
+    var neighboursDisplay = document.querySelector(".neighbours");
+    neighboursDisplay.style.display = "none";
+    var weatherDisplay = document.querySelector(".weather");
+    weatherDisplay.style.display = "none";
+}
 
-//fizza
+function showNeighbours() {
+    var overviewDisplay = document.querySelector(".overview");
+    overviewDisplay.style.display = "none";
+    var travelAdviceDisplay = document.querySelector(".advice");
+    travelAdviceDisplay.style.display = "none";
+    var neighboursDisplay = document.querySelector(".neighbours");
+    neighboursDisplay.style.display = "grid";
+    var weatherDisplay = document.querySelector(".weather");
+    weatherDisplay.style.display = "none";
+}
+
+function showWeather() {
+    var overviewDisplay = document.querySelector(".overview");
+    overviewDisplay.style.display = "none";
+    var travelAdviceDisplay = document.querySelector(".advice");
+    travelAdviceDisplay.style.display = "none";
+    var neighboursDisplay = document.querySelector(".neighbours");
+    neighboursDisplay.style.display = "none";
+    var weatherDisplay = document.querySelector(".weather");
+    weatherDisplay.style.display = "grid";
+}
+
 function fetchTravelApi() {
     country = countryOfTravel;
     var travelAPI = "https://travelbriefing.org/" + country + "?format=json";
