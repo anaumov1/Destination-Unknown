@@ -88,35 +88,51 @@ function OverView (countryOfTravel) {
         })
         .then(function (responseStr) {
             //display flag
+            flag(responseStr);
+            //display capital
+            capital(responseStr);
+            //display region
+            region(responseStr);
+
             console.log(responseStr[0]);
             // will use this to display the flag
-            var flagImg = document.createElement('img');
-            var flagContainer = document.getElementById("flag")
-            flagImg.setAttribute('src', responseStr[0].flag);
-            flagImg.setAttribute('alt', 'add falf');
-
-            console.log("jshjshsh"+flagImg)
-            flagContainer.append(flagImg);
         });
 
+
+}
+function region(responseStr)
+{
+document.getElementById("region").textContent="\t"+responseStr[0].region;
+}
+function capital(responseStr)
+{
+document.getElementById("capital").textContent="\t"+responseStr[0].capital;
+}
+function flag(responseStr)
+{
+             var flagImg = document.createElement('img');
+            var flagContainer = document.getElementById("flag")
+            flagImg.setAttribute('src', responseStr[0].flag);
+            flagImg.setAttribute('alt', 'add flag');
+            flagContainer.append(flagImg);
 }
 function vaccination(responseStr)
 {
       //display required vaccination
       if (responseStr.vaccinations.length === 0) {
-           console.log("There are no vaccinations for " + country)
+         //  console.log("There are no vaccinations for " + country)
         }
 
         for (let i = 0; i < responseStr.vaccinations.length; i++) {
             responseStr.vaccinations
-          console.log("name: " + responseStr.vaccinations[i].name)
-          console.log("message: " + responseStr.vaccinations[i].message)
+      //    console.log("name: " + responseStr.vaccinations[i].name)
+        //  console.log("message: " + responseStr.vaccinations[i].message)
         }
 }
 
 window.onload = function(){
- //added flag
- DisplayFlag(country)
+ //added flag, capital
+ OverView(country)
  //display all the required info
  DisplayInfo();
 };
