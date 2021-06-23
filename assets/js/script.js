@@ -38,10 +38,13 @@ var airlines = document.querySelector("#airlines")
 var formSubmit = document.querySelector("#submit");
 
 
+
+
 //onload of page, load countries
 window.onload = function(){
     loadCountries();
 };
+
 
 // load searches from local storage
 var loadCountries = function () {
@@ -60,15 +63,38 @@ var loadCountries = function () {
         //iterate through storageObject and create buttons for each previously searched country
         for(var i = 0; i < storageObject.length; i++){
             var previousSearchBtn = document.createElement("button");
-            previousSearchBtn.setAttribute("class", "button is-warning select-button previousSearch");
+            previousSearchBtn.setAttribute("class", "button is-info select-button previousSearch");
             previousSearchBtn.style.marginLeft = "20px";
             previousSearchBtn.style.marginRight = "20px";
             previousSearchBtn.setAttribute("id",i);
             previousSearchBtn.innerText = storageObject[i];
             previousSearchContainer.append(previousSearchBtn);
         }
+        addEventListenerToHistory()
     }
 };
+
+
+var addEventListenerToHistory = function () {
+    var allHistoryBtns = document.querySelectorAll(".is-info")
+    for (var e = 0; e < allHistoryBtns.length; e++) {
+        allHistoryBtns[e].addEventListener("click", selectCountry)
+    }
+    console.log(allHistoryBtns);
+
+}
+
+var selectCountry = function (event) {
+    console.log(event)
+    // //target event
+    var btnTarget = event.target.firstChild.data;
+    console.log(btnTarget)
+    country = btnTarget;
+    console.log(country);
+
+}  
+
+
 
 function display_clock() {
     var x = new Date()
@@ -335,7 +361,7 @@ var pricingInformation = function () {
         priceli.innerHTML = "$ " + price + " <br/>";
 
         var priceBtn = document.createElement("button")
-        priceBtn.setAttribute("class", "button is-warning select-button");
+        priceBtn.setAttribute("class", "button is-info select-button");
         priceBtn.setAttribute("id", "Button-" + q);
         priceBtn.textContent = "Select"
         priceli.append(priceBtn);
@@ -359,7 +385,7 @@ var countryChoice = function (event) {
     var btnTarget = event.target.attributes[1].value;
     btnTarget = btnTarget.split("-")[1];
     console.log(btnTarget)
-        
+
     //set country of travel to value 
     countryOfTravel = CountryOut[btnTarget]  
 
@@ -381,18 +407,22 @@ var countryChoice = function (event) {
 
         //create button with value of countryOfTravel
         var previousSearchBtn = document.createElement("button");
-        previousSearchBtn.setAttribute("class", "button is-warning select-button previousSearch");
+        previousSearchBtn.setAttribute("class", "button is-info select-button previousSearch");
         previousSearchBtn.style.marginLeft = "20px";
         previousSearchBtn.style.marginRight = "20px";
         previousSearchBtn.innerHTML = countryOfTravel;
         previousSearchContainer.append(previousSearchBtn);
+        addEventListenerToHistory();
 
         //new countryOfTravel is added to the storageObject which is then set to localStorage
         storageObject.push(countryOfTravel);
         console.log(storageObject);
         localStorage.setItem('storageObject', JSON.stringify(storageObject));
-    }
+
         
+    }
+ 
+
     //populate from-to banner
     console.log(countryOfTravel);
     var fromTo = document.querySelector("#from-to");
