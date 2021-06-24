@@ -61,7 +61,7 @@ function DisplayInfo() {
         })
         .then(function (responseStr) {
             // display travel advice
-         //   console.log("advise:" + responseStr.advise.UA.advise)//FROM 
+            travelAdvise(responseStr)
             //display vaccination 
             vaccination(responseStr);
 
@@ -75,7 +75,10 @@ function DisplayInfo() {
            // console.log(responseStr)
         });
 }
-
+function travelAdvise(responseStr)
+{
+     document.getElementById("travel-advice").textContent=responseStr.advise.UA.advise;
+}
 //api to get the country flags etc
 function OverView (countryOfTravel) {
     var travelApi2 = 'https://restcountries.eu/rest/v2/name/' + countryOfTravel;
@@ -102,6 +105,7 @@ function OverView (countryOfTravel) {
 
 
 }
+
 function languages(responseStr)
 {
          var langEl=document.getElementById("language");
@@ -115,6 +119,7 @@ function languages(responseStr)
                 }
        }
 }
+
 function region(responseStr)
 {
 document.getElementById("region").textContent="\t"+responseStr[0].region;
