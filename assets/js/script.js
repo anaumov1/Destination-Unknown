@@ -73,6 +73,7 @@ var loadCountries = function () {
             previousSearchBtn.setAttribute("id",i);
             previousSearchBtn.innerText = storageObject[i];
             previousSearchContainer.append(previousSearchBtn);
+
         }
         addEventListenerToHistory()
         
@@ -83,6 +84,7 @@ var loadCountries = function () {
 var addEventListenerToHistory = function () {
     var allHistoryBtns = document.querySelectorAll(".is-success")
     for (var e = 0; e < allHistoryBtns.length; e++) {
+        alert("im click this")
         allHistoryBtns[e].addEventListener("click", selectCountry)
     }
     console.log(allHistoryBtns);
@@ -102,6 +104,7 @@ var selectCountry = function (event) {
     countryOfTravel = btnTargetHistory; 
     // debugger;
     //fetchTravelApi(); 
+    localStorage.setItem("selected-country",countryOfTravel);
     linkInfoPage(); 
 }  
 
