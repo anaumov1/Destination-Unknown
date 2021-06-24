@@ -41,3 +41,6 @@
 
 ## Photos:
 
+![LandingPage](https://github.com/anaumov1/api-project/blob/develop/assets/images/Landingpg.JPG)
+![FlightSearch](https://github.com/anaumov1/api-project/blob/develop/assets/images/FlightSearch.JPG)
+![PastSearchButtons](https://github.com/anaumov1/api-project/blob/develop/assets/images/PastSearchBtns.JPG)
