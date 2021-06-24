@@ -77,8 +77,7 @@ function DisplayInfo() {
 }
 function travelAdvise(responseStr)
 {
-    
-    document.getElementById("travel-advice").textContent=responseStr.advise.UA.advise;
+      document.getElementById("travel-advice").textContent=responseStr.advise.UA.advise;
 }
 //api to get the country flags etc
 function OverView (countryOfTravel) {
@@ -141,11 +140,16 @@ function vaccination(responseStr)
 {
       //display required vaccination
       if (responseStr.vaccinations.length === 0) {
-         //  console.log("There are no vaccinations for " + country)
+          var vacEl=document.createElement("p");
+vacEl.textContent="There are no vaccinations for " + country;
+document.querySelector(".column advice").append(vacEl);
         }
 
         for (let i = 0; i < responseStr.vaccinations.length; i++) {
-            responseStr.vaccinations
+            //responseStr.vaccinations
+            var vacEl=document.createElement("p");
+            vacEl.textContent="There are no vaccinations for " + country;
+            document.querySelector(".column advice").append(vacEl);
       //    console.log("name: " + responseStr.vaccinations[i].name)
         //  console.log("message: " + responseStr.vaccinations[i].message)
         }
