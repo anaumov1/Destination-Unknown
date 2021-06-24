@@ -63,7 +63,6 @@ function DisplayInfo() {
             // display travel advice
             travelAdvise(responseStr)
             //display vaccination 
-            vaccination(responseStr);
 
             //display weather
             var currentMonth = moment().format('MMMM'); // returns name eg. January      
@@ -78,6 +77,7 @@ function DisplayInfo() {
 function travelAdvise(responseStr)
 {
       document.getElementById("travel-advice").textContent=responseStr.advise.UA.advise;
+      vaccination(responseStr)
 }
 //api to get the country flags etc
 function OverView (countryOfTravel) {
@@ -141,15 +141,18 @@ function vaccination(responseStr)
       //display required vaccination
       if (responseStr.vaccinations.length === 0) {
           var vacEl=document.createElement("p");
+          console.log("Sas")
+
 vacEl.textContent="There are no vaccinations for " + country;
-document.querySelector(".column advice").append(vacEl);
+document.querySelector("#vaccination").appendChild(vacEl);
         }
 
         for (let i = 0; i < responseStr.vaccinations.length; i++) {
             //responseStr.vaccinations
             var vacEl=document.createElement("p");
             vacEl.textContent="There are no vaccinations for " + country;
-            document.querySelector(".column advice").append(vacEl);
+            console.log("Sas")
+            document.querySelector("#vaccination").append(vacEl);
       //    console.log("name: " + responseStr.vaccinations[i].name)
         //  console.log("message: " + responseStr.vaccinations[i].message)
         }
