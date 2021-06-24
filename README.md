@@ -24,6 +24,9 @@
 * TailWind
 * Font Awesome
 * Bulma
+* Flexbox
+* JQuery
+* Moment.js
 * SkyScanner Travel API via Rapid API
 * Travel Briefing API
 * REST Countries API
