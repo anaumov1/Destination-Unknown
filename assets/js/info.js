@@ -77,7 +77,8 @@ function DisplayInfo() {
 }
 function travelAdvise(responseStr)
 {
-     document.getElementById("travel-advice").textContent=responseStr.advise.UA.advise;
+    
+    document.getElementById("travel-advice").textContent=responseStr.advise.UA.advise;
 }
 //api to get the country flags etc
 function OverView (countryOfTravel) {
