@@ -37,7 +37,7 @@
 
 ## Links:
 * GitHub Repository: https://github.com/anaumov1/api-project
-* Travel with us: https://github.com/anaumov1/api-project/tree/main
+* Travel with us:  https://anaumov1.github.io/api-project/
 
 ## Photos:
 
