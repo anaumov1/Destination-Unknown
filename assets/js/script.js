@@ -84,7 +84,7 @@ var loadCountries = function () {
 var addEventListenerToHistory = function () {
     var allHistoryBtns = document.querySelectorAll(".is-success")
     for (var e = 0; e < allHistoryBtns.length; e++) {
-        alert("im click this")
+        console.log("im click this")
         allHistoryBtns[e].addEventListener("click", selectCountry)
     }
     console.log(allHistoryBtns);
@@ -104,8 +104,9 @@ var selectCountry = function (event) {
     countryOfTravel = btnTargetHistory; 
     // debugger;
     //fetchTravelApi(); 
-    localStorage.setItem("selected-country",countryOfTravel);
-    linkInfoPage(); 
+    console.log("btnTargetHistory");
+
+   linkInfoPage(); 
 }  
 
 
@@ -421,6 +422,7 @@ var countryChoice = function (event) {
     iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
     localStorage.setItem("selected-country",countryOfTravel);
     // window.open("countries.html","_self")
+    console.log("sc")
     linkInfoPage(); 
 }
 
