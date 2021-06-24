@@ -104,9 +104,9 @@ var selectCountry = function (event) {
     countryOfTravel = btnTargetHistory; 
     // debugger;
     //fetchTravelApi(); 
-    console.log("btnTargetHistory");
-
-   linkInfoPage(); 
+   
+    localStorage.setItem("selected-country",countryOfTravel);
+  linkInfoPage(); 
 }  
 
 
@@ -421,8 +421,6 @@ var countryChoice = function (event) {
     iconContainer.append(iconImage)
     iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
     localStorage.setItem("selected-country",countryOfTravel);
-    // window.open("countries.html","_self")
-    console.log("sc")
     linkInfoPage(); 
 }
 
