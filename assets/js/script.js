@@ -3,7 +3,7 @@
 
 var storageObject;
 var destinationPlace = "anywhere";
-var resultsLocale = "en-US"; 
+var resultsLocale = "en-US";
 var currency = "USD";
 var marketCountry = "US";
 var limitedQuotes = [];
@@ -42,7 +42,7 @@ var formSubmit = document.querySelector("#submit");
 
 
 //onload of page, load countries
-window.onload = function(){
+window.onload = function () {
     loadCountries();
 };
 
@@ -55,28 +55,28 @@ var loadCountries = function () {
     storageObject = JSON.parse(localStorage.getItem("storageObject"));
     console.log(storageObject)
     //if storageObject doesn't exist, initialize object
-    if(storageObject === null){
+    if (storageObject === null) {
         console.log("empty storage");
         storageObject = [];
     }
-    else{
+    else {
         console.log("loading storage");
         storageObject = JSON.parse(localStorage.getItem("storageObject"));
         console.log(storageObject);
 
         //iterate through storageObject and create buttons for each previously searched country
-        for(var i = 0; i < storageObject.length; i++){
+        for (var i = 0; i < storageObject.length; i++) {
             var previousSearchBtn = document.createElement("button");
             previousSearchBtn.setAttribute("class", "button is-success  previousSearch");
             previousSearchBtn.style.marginLeft = "20px";
             previousSearchBtn.style.marginRight = "20px";
-            previousSearchBtn.setAttribute("id",i);
+            previousSearchBtn.setAttribute("id", i);
             previousSearchBtn.innerText = storageObject[i];
             previousSearchContainer.append(previousSearchBtn);
 
         }
         addEventListenerToHistory()
-        
+
     }
 };
 
@@ -96,18 +96,18 @@ var selectCountry = function (event) {
     // btnTargetHistory = event.target.firstChild.data;
     btnTargetHistory = event.target.innerHTML;
     console.log(btnTargetHistory);
-    if(btnTargetHistory === null || undefined){
+    if (btnTargetHistory === null || undefined) {
         btnTargetHistory = event.target.firstChild.data;
         console.log(btnTargetHistory);
     }
     console.log(btnTargetHistory);
-    countryOfTravel = btnTargetHistory; 
+    countryOfTravel = btnTargetHistory;
     // debugger;
     //fetchTravelApi(); 
-   
-    localStorage.setItem("selected-country",countryOfTravel);
-  linkInfoPage(); 
-}  
+
+    localStorage.setItem("selected-country", countryOfTravel);
+    linkInfoPage();
+}
 
 
 
@@ -177,7 +177,7 @@ formSubmit.addEventListener('click', function (event) {
     //returnDate: yyyy-mm-dd, yyyy-mm (return Date)
     //locale:en-US
     //originplace: "IAH-sky" "AUM-sky", "DAL-sky", and "DFW-sky"
-    
+
 
     fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/" + marketCountry + "/" + currency + "/" + resultsLocale + "/" + pointOfOrigin + "/" + destinationPlace + "/" + departureDate + "/" + returnDate, {
         "method": "GET",
@@ -369,21 +369,21 @@ var countryChoice = function (event) {
     console.log(btnTarget)
 
     //set country of travel to value 
-    countryOfTravel = CountryOut[btnTarget]  
+    countryOfTravel = CountryOut[btnTarget]
 
 
     //check to see if storageObject exists and if it contains the currently selected country of Travel
-    if(storageObject){
+    if (storageObject) {
         var contains = storageObject.includes(countryOfTravel);
         console.log(contains);
-    } 
-    
+    }
+
     //if contains returns true, value already exists
-    if(contains){
+    if (contains) {
         console.log(contains);
         console.log("value exists");
     }
-    else{
+    else {
         //returns false, new value is added to storage and a button is created to contain the country name
         console.log("adding new value");
 
@@ -396,16 +396,16 @@ var countryChoice = function (event) {
         previousSearchContainer.append(previousSearchBtn);
         addEventListenerToHistory();
 
-        
+
 
         //new countryOfTravel is added to the storageObject which is then set to localStorage
         storageObject.push(countryOfTravel);
         console.log(storageObject);
         localStorage.setItem('storageObject', JSON.stringify(storageObject));
 
-        
+
     }
- 
+
 
     //populate from-to banner
     console.log(countryOfTravel);
@@ -420,7 +420,7 @@ var countryChoice = function (event) {
     iconImage = document.createElement("i");
     iconContainer.append(iconImage)
     iconImage.innerHTML = '<i class="fa-solid fa-right-left"></i>'
-    localStorage.setItem("selected-country",countryOfTravel);
-    linkInfoPage(); 
+    localStorage.setItem("selected-country", countryOfTravel);
+    linkInfoPage();
 }
 
