@@ -1,7 +1,7 @@
 //fetch the selected country
 country = localStorage.getItem("selected-country");
 //display country name on top
-document.getElementById("country-name").textContent=country;
+document.getElementById("country-name").textContent = country;
 function showOverview() {
     var overviewDisplay = document.querySelector(".overview");
     overviewDisplay.style.display = "grid";
@@ -49,7 +49,7 @@ function showWeather() {
 }
 
 function DisplayInfo() {
-  
+
     var travelAPI = "https://travelbriefing.org/" + country + "?format=json";
 
     fetch(travelAPI)
@@ -65,22 +65,34 @@ function DisplayInfo() {
             //display vaccination 
 
             //display weather
-            var currentMonth = moment().format('MMMM'); // returns name eg. January      
-            var temp = responseStr.weather[currentMonth].tAvg;
-            temp = parseInt(temp).toFixed(1);
-           // console.log(temp + '°C');
+            weather(responseStr);
 
-            //display capital
-           // console.log(responseStr)
+            //display neighbors
+            neighbours(responseStr);
         });
 }
-function travelAdvise(responseStr)
+function weather(responseStr)
 {
-      document.getElementById("travel-advice").textContent=responseStr.advise.UA.advise;
-      vaccination(responseStr)
+      var currentMonth = moment().format('MMMM'); // returns name eg. January      
+    var temp = responseStr.weather[currentMonth].tAvg;
+    temp = parseInt(temp).toFixed(1);
+     console.log(temp + '°C');
+}
+function neighbours(responseStr) {
+    var ul = document.getElementById("neighbours-list");
+    for (let i = 0; i < responseStr.neighbors.length; i++) {
+        var li = document.createElement("li");
+        li.innerHTML = (i + 1) + " . " + responseStr.neighbors[i].name;
+        ul.append(li);
+    }
+
+}
+function travelAdvise(responseStr) {
+    document.getElementById("travel-advice").textContent = responseStr.advise.UA.advise;
+    vaccination(responseStr)
 }
 //api to get the country flags etc
-function OverView (countryOfTravel) {
+function OverView(countryOfTravel) {
     var travelApi2 = 'https://restcountries.eu/rest/v2/name/' + countryOfTravel;
     fetch(travelApi2)
         .then(function (response) {
@@ -99,71 +111,72 @@ function OverView (countryOfTravel) {
             //display languages
             languages(responseStr);
 
-            console.log(responseStr[0]);
+            //console.log(responseStr[0]);
             // will use this to display the flag
         });
 
 
 }
 
-function languages(responseStr)
-{
-         var langEl=document.getElementById("language");
-           for (let i = 0; i < responseStr[0].languages.length; i++)
-            {
-                langEl.textContent+="\t"+responseStr[0].languages[i].name
-//to add ',' after every language name except the last one
-                if(responseStr[0].languages.length>0 && i <responseStr[0].languages.length-1)
-                {
-                    langEl.textContent+=","
-                }
-       }
-}
-
-function region(responseStr)
-{
-document.getElementById("region").textContent="\t"+responseStr[0].region;
-}
-function capital(responseStr)
-{
-document.getElementById("capital").textContent="\t"+responseStr[0].capital;
-}
-function flag(responseStr)
-{
-             var flagImg = document.createElement('img');
-            var flagContainer = document.getElementById("flag")
-            flagImg.setAttribute('src', responseStr[0].flag);
-            flagImg.setAttribute('alt', 'add flag');
-            flagContainer.append(flagImg);
-}
-function vaccination(responseStr)
-{
-      //display required vaccination
-      if (responseStr.vaccinations.length === 0) {
-          var vacEl=document.createElement("p");
-          console.log("Sas")
-
-vacEl.textContent="There are no vaccinations for " + country;
-document.querySelector("#vaccination").appendChild(vacEl);
+function languages(responseStr) {
+    var langEl = document.getElementById("language");
+    for (let i = 0; i < responseStr[0].languages.length; i++) {
+        langEl.textContent += "\t" + responseStr[0].languages[i].name
+        //to add ',' after every language name except the last one
+        if (responseStr[0].languages.length > 0 && i < responseStr[0].languages.length - 1) {
+            langEl.textContent += ","
         }
-
-        for (let i = 0; i < responseStr.vaccinations.length; i++) {
-            //responseStr.vaccinations
-            var vacEl=document.createElement("p");
-            vacEl.textContent="There are no vaccinations for " + country;
-            console.log("Sas")
-            document.querySelector("#vaccination").append(vacEl);
-      //    console.log("name: " + responseStr.vaccinations[i].name)
-        //  console.log("message: " + responseStr.vaccinations[i].message)
-        }
+    }
 }
 
-window.onload = function(){
- //added flag, capital
- OverView(country)
- //display all the required info
- DisplayInfo();
+function region(responseStr) {
+    document.getElementById("region").textContent = "\t" + responseStr[0].region;
+}
+function capital(responseStr) {
+    document.getElementById("capital").textContent = "\t" + responseStr[0].capital;
+}
+function flag(responseStr) {
+    var flagImg = document.createElement('img');
+    var flagContainer = document.getElementById("flag")
+    flagImg.setAttribute('src', responseStr[0].flag);
+    flagImg.setAttribute('alt', 'add flag');
+    flagContainer.append(flagImg);
+}
+function vaccination(responseStr) {
+    //display required vaccination
+
+    if (responseStr.vaccinations.length === 0) {
+        var vacEl = document.createElement("p");
+        vacEl.textContent = "There are no vaccinations for " + country;
+        document.querySelector("#vaccination").appendChild(vacEl);
+
+    }
+    else{
+        var heading = document.createElement("p");
+        heading.setAttribute("style", "font-weight:bolder ")
+        heading.innerHTML = "<br>Required Vaccination<br><br>";
+        document.querySelector("#vaccination").append(heading);
+
+        var vaculEl = document.getElementById("list");
+
+        for (let i = 0; i < responseStr.vaccinations.length; i++)
+         {
+            var vacEl = document.createElement("li");
+            vacEl.textContent = (i+1)+". "+responseStr.vaccinations[i].name +" : "+responseStr.vaccinations[i].message;
+           vaculEl.appendChild(vacEl)
+          }
+    document.querySelector("#vaccination").append(vaculEl);
+
+
+}
+}
+
+window.onload = function () {
+    //added flag, capital
+    OverView(country)
+    //display all the required info
+    DisplayInfo();
 };
-       
+
 
 
