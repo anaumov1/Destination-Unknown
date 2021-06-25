@@ -87,7 +87,7 @@ function weather(responseStr) {
     var lowEl = document.getElementById("low");
     var currentMonth = moment().format('MMMM'); // returns name eg. January    
     lowEl.textContent = currentMonth;
-    var temp = responseStr.weather[currentMonth].tMin;
+    var temp = responseStr.weather[currentMonth].tMax;
     temp = parseInt(temp).toFixed(1);
     //covert in  fahrenheit
     temp = (temp * 9 / 5) + 32;
@@ -97,7 +97,7 @@ function weather(responseStr) {
     var highEl = document.getElementById("high");
     var currentMonth = moment().format('MMMM'); // returns name eg. January    
     highEl.textContent = currentMonth;
-    var temp = responseStr.weather[currentMonth].tMax;
+    var temp = responseStr.weather[currentMonth].tMin;
     temp = parseInt(temp).toFixed(1);
     //covert in  fahrenheit
     temp = (temp * 9 / 5) + 32;
