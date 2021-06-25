@@ -161,7 +161,7 @@ function vaccination(responseStr) {
     else{
         var heading = document.createElement("p");
         heading.setAttribute("style", "font-weight:bolder ")
-        heading.innerHTML = "<br>Required Vaccination<br><br>";
+        heading.innerHTML = "<br>Required Vaccination<br>";
         document.querySelector("#vaccination").append(heading);
 
         var vaculEl = document.getElementById("list");
@@ -169,7 +169,7 @@ function vaccination(responseStr) {
         for (let i = 0; i < responseStr.vaccinations.length; i++)
          {
             var vacEl = document.createElement("li");
-            vacEl.textContent = (i+1)+". "+responseStr.vaccinations[i].name +" : "+responseStr.vaccinations[i].message;
+            vacEl.innerHTML = "<br>"+(i+1)+". "+responseStr.vaccinations[i].name +" : "+responseStr.vaccinations[i].message+"<br>";
            vaculEl.appendChild(vacEl)
           }
     document.querySelector("#vaccination").append(vaculEl);
@@ -179,6 +179,8 @@ function vaccination(responseStr) {
 }
 
 window.onload = function () {
+    //display overvire
+    showOverview() 
     //added flag, capital
     OverView(country)
     //display all the required info
