@@ -60,9 +60,12 @@
                             <option value="DFWA-sky">"DFW" Dallas Fort-Worth</option>
                             <option value="IAH-sky">"IAH" Houston</option>
                             <option value="AUM-sky">"AUM" Austin</option>
+                            
                         </select>
+                        <span id="home-airport-errors"></span>
                     </div>
                     </br>
+                    
                     <label>To</label>
                     <input id="flying-to" class="input" type="text" placeholder="Leave blank if you feel adventurous!"
                         value="anywhere">
@@ -70,17 +73,17 @@
                     <!--calendar form - departure-->
                     <form action="/action_page.php">
                         <label class="mt-12" for="departure-date">Leaving on</label>
-                        <input class="text-gray-600 mt-2 rounded h-10 " type="date" id="departure-date"
-                            name="departure-date">
-
+                        <input class="text-gray-600 mt-2 rounded h-10 " type="date" id="departure-date" name="departure-date">
+                        <span id="departure-errors"></span>
                     </form>
                     <!--calendar form - returning-->
                     <form action="/action_page.php">
                         <label class="mt-12" for="return-date">Returning on</label>
                         <input class="text-gray-600 mt-2 rounded h-10" type="date" id="return-date" name="return-date">
+                        <span id="return-errors"></span>
                     </form>
-
-                    <button class="button is-warning mt-2 ml-36" id="submit">Let's go</button>
+                    
+                    <button class="button is-warning mt-2 ml-36" id="submit" >Let's go</button>
 
                 </div>
                 <!--column two - left side - hero text-->
@@ -89,6 +92,7 @@
                 </div>
             </div>
         </div>
+
         ​
         <!--serch info box-->
         <div class="column is-full" id="search-info-box">
@@ -146,10 +150,15 @@
                                 <ul id="pricing">
                                 </ul>
                             </div>
+                        
                         </div> ​
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div id = "clear-btn">
+            <button id="clear-results"class="button is-black">Clear Results</button>
         </div>
         ​
         <!--Saved Cuontries box-->

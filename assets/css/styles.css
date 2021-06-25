@@ -342,3 +342,11 @@ padding: 3px;
       font-size: 32px;
   }
 }
+
+#clear-btn{
+    width: 100%;
+}
+
+.is-black{
+    width:100%;
+}

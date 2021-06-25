@@ -29,6 +29,16 @@ var skyScannerCountryCode;
 var skyScannerStationCode;
 var returnDate;
 var btnTargetHistory;
+var currentDate;
+var currentMonth;
+var currentDay;
+var currentYear;
+var departureDateYear;
+var departureDateMonth;
+var departureDateDay;
+var returnDateYear;
+var returnDateMonth;
+var returnDateDay;
 
 var previousSearchContainer = document.querySelector("#saved-countries");
 var flightDisplay = document.getElementById("flight-display")
@@ -37,8 +47,11 @@ var dates = document.querySelector("#dates");
 var destination = document.querySelector("#destination");
 var airlines = document.querySelector("#airlines")
 var formSubmit = document.querySelector("#submit");
-
-
+var clearBtn = document.querySelector("#clear-results");
+var searchResultsBox = document.querySelector("#search-results-box");
+var homeAirportErrors = document.querySelector("#home-airport-errors")
+var departureErrors = document.querySelector("#departure-errors");
+var returnErrors = document.querySelector("#return-errors");
 
 
 //onload of page, load countries
@@ -84,7 +97,6 @@ var loadCountries = function () {
 var addEventListenerToHistory = function () {
     var allHistoryBtns = document.querySelectorAll(".is-success")
     for (var e = 0; e < allHistoryBtns.length; e++) {
-        console.log("im click this")
         allHistoryBtns[e].addEventListener("click", selectCountry)
     }
     console.log(allHistoryBtns);
@@ -109,14 +121,12 @@ var selectCountry = function (event) {
     linkInfoPage();
 }
 
-
-
 function display_clock() {
     var x = new Date()
     var ampm = x.getHours() >= 12 ? ' PM' : ' AM';
 
     var x1 = x.getMonth() + 1 + "/" + x.getDate() + "/" + x.getFullYear();
-    x1 = x1 + " - " + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds() + ":" + ampm;
+    x1 = x1 + " - " + x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds() + " " + ampm;
     document.getElementById('clock').innerHTML = x1;
     display_c5();
 }
@@ -126,7 +136,12 @@ function display_c5() {
 }
 display_c5()
 
+clearBtn.addEventListener('click',function(event){
+    event.preventDefault();
+    console.log(event);
+    searchResultsBox.innerHTML = " ";
 
+})
 
 
 
@@ -139,29 +154,143 @@ formSubmit.addEventListener('click', function (event) {
     //grab value of ptOfOrigin from form (current default: IAH,AUM or DWFA)
     var pointOfOrigin = document.getElementById("ptOfOrigin").value;
     console.log(pointOfOrigin);
+    if(pointOfOrigin === "Choose home airport"){
+        homeAirportErrors.textContent = "Please choose an airport"
+        homeAirportErrors.style.color = 'yellow'       
+        return;
+    }
+    else{
+        homeAirportErrors.textContent=" "
+    }
 
     //grab departureDate from calendar on form
     var departureDate = document.querySelector("#departure-date").value;
     //formating date to YYYY/MM/DD
-    var departureDateFormat = moment(departureDate).format("YYYY/MM/DD");
-    console.log(departureDateFormat);
     console.log(departureDate);
+    var departureDateFormat = moment(departureDate).format("YYYY/MM/DD");
+    console.log(departureDateFormat + " selected departure date");
 
-    // let today = new Date().toLocaleDateString()
-    // console.log(today);
-    // console.log(departureDate);
+    //format departureDate for checking for valid date
+    departureDateYear = departureDate.split("-")[0]
+    var departureDateYearInt = parseInt(departureDateYear);
+    console.log("departure year is: " + departureDateYearInt );
 
-    // //validate departureDate
-    // if(departureDate < today){
-    //     alert("date in the past");
-    // }
+    //grab month of departureDate
+    departureDateMonth = departureDate.split("-")[1];
+    var departureDateMonthInt = parseInt(departureDateMonth);
+    console.log("departure month is: " + departureDateMonthInt);
+
+    //grab day of departureDate
+    departureDateDay = departureDate.split("-")[2];
+    var departureDateDayInt = parseInt(departureDateDay);
+    console.log("departure day is : " + departureDateDayInt);
+    
+    //get current date for comparison
+    currentDate = new Date()
+    console.log(currentDate);
+
+    //grab month of currentDate
+    currentMonth =currentDate.getMonth()+1
+    console.log("current month is: "+ currentMonth);
+
+    //grab year of currentYear
+    currentYear = currentDate.getFullYear();
+    console.log("current year is: " + currentYear);
+
+    //grab day of currentYear
+    currentDay = currentDate.getDate();
+    console.log("current day is: " + currentDay);
+
+    //confirm departure date is valid(error handling)
+    if(currentYear < departureDateYearInt){
+        departureErrors.textContent = " ";
+    }
+    else if( currentYear === departureDateYearInt){        
+        if(currentMonth <  departureDateMonthInt){
+            departureErrors.textContent = " ";
+        }
+        else if(currentMonth === departureDateMonthInt){   
+            if(currentDay >= departureDateDayInt){
+                departureErrors.textContent = "Please choose an valid date";
+                departureErrors.style.color = 'yellow'
+                return;
+            }
+            else{
+                departureErrors.textContent = " ";
+            }
+
+        }
+        else{
+            //currentMonth > departureMonth of the same year
+            departureErrors.textContent = "Please choose an valid date"
+            departureErrors.style.color = 'yellow'
+            return;
+        }
+
+    }
+    else{
+        departureErrors.textContent = "Please choose an valid date";
+        departureErrors.style.color = 'yellow'
+        return;
+    }
 
     //grab returnDate from calendar on form
     returnDate = document.querySelector("#return-date").value;
     //formating date to YYYY/MM/DD
     var returnDateFormat = moment(returnDate).format("YYYY/MM/DD");
     console.log(returnDateFormat);
-    console.log(returnDate);
+
+    //grab year of ReturnDate
+    returnDateYear = returnDate.split("-")[0]
+    var returnDateYearInt = parseInt(returnDateYear);
+    console.log("return year is: " + returnDateYearInt );
+
+    //grab month of returnDate
+    returnDateMonth = returnDate.split("-")[1];
+    var returnDateMonthInt = parseInt(returnDateMonth);
+    console.log("return month is: " + returnDateMonthInt);
+
+    //grab day of ReturnDate
+    returnDateDay = returnDate.split("-")[2];
+    var returnDateDayInt = parseInt(returnDateDay);
+    console.log("return day is : " + returnDateDayInt);
+
+    //confirm return date is after departure date
+    //if return date is next year
+    if(departureDateYearInt < returnDateYearInt){
+        returnErrors.textContent = " ";
+    }
+    //else if return date is this year
+    else if( departureDateYearInt === returnDateYearInt){
+        //return date month is a future month
+        if(departureDateMonthInt < returnDateMonthInt){
+            returnErrors.textContent = " ";
+        }
+        //returnDate is this month
+        else if(departureDateMonthInt === returnDateMonthInt){
+            //return day is after departure day of the same month in the same year
+            if(departureDateDayInt < returnDateDayInt){
+                returnErrors.textContent = " ";
+            }
+            else{
+                returnErrors.textContent = "Please choose an valid date";
+                returnErrors.style.color = 'yellow'
+                return;
+            }
+
+        }
+        else{
+            returnErrors.textContent = "Please choose an valid date";
+            returnErrors.style.color = 'yellow'
+            return;
+        }
+
+    }
+    else{
+        returnErrors.textContent = "Please choose an valid date";
+        returnErrors.style.color = 'yellow'
+        return;
+    }
 
     //grab destination( current default: anywhere)
     var destinationPlace = document.getElementById("flying-to").value
