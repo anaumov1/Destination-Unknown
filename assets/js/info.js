@@ -77,12 +77,35 @@ function weather(responseStr)
     var weatherEl=document.getElementById("weather-month");
       var currentMonth = moment().format('MMMM'); // returns name eg. January    
       weatherEl.textContent=currentMonth;  
+      //average
     var temp = responseStr.weather[currentMonth].tAvg;
     temp = parseInt(temp).toFixed(1);
     //covert in  fahrenheit
     temp=(temp*9/5) + 32 ;
 
     weatherEl.textContent+=' is '+temp + '°F';
+    //lowest
+    var lowEl=document.getElementById("low");
+    var currentMonth = moment().format('MMMM'); // returns name eg. January    
+    lowEl.textContent=currentMonth;  
+    //average
+  var temp = responseStr.weather[currentMonth].tMin;
+  temp = parseInt(temp).toFixed(1);
+  //covert in  fahrenheit
+  temp=(temp*9/5) + 32 ;
+
+  lowEl.textContent+=' is '+temp + '°F';
+  //high
+  var highEl=document.getElementById("high");
+  var currentMonth = moment().format('MMMM'); // returns name eg. January    
+  highEl.textContent=currentMonth;  
+  //average
+var temp = responseStr.weather[currentMonth].tAvg;
+temp = parseInt(temp).toFixed(1);
+//covert in  fahrenheit
+temp=(temp*9/5) + 32 ;
+
+highEl.textContent+=' is '+temp + '°F';
 }
 function neighbours(responseStr) {
     var ul = document.getElementById("neighbours-list");
