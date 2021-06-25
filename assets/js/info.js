@@ -69,11 +69,14 @@ function DisplayInfo() {
 
             //display neighbors
             neighbours(responseStr);
+            console.log(responseStr)
         });
 }
 function weather(responseStr)
 {
-      var currentMonth = moment().format('MMMM'); // returns name eg. January      
+    var weatherEl=document.getElementById("weather-month");
+      var currentMonth = moment().format('MMMM'); // returns name eg. January    
+      weatherEl.textContent=currentMonth;  
     var temp = responseStr.weather[currentMonth].tAvg;
     temp = parseInt(temp).toFixed(1);
      console.log(temp + '°C');
