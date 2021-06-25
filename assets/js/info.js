@@ -79,13 +79,17 @@ function weather(responseStr)
       weatherEl.textContent=currentMonth;  
     var temp = responseStr.weather[currentMonth].tAvg;
     temp = parseInt(temp).toFixed(1);
-     console.log(temp + '°C');
+    //covert in  fahrenheit
+    temp=(temp*9/5) + 32 ;
+
+    weatherEl.textContent+=' is '+temp + '°F';
 }
 function neighbours(responseStr) {
     var ul = document.getElementById("neighbours-list");
     for (let i = 0; i < responseStr.neighbors.length; i++) {
         var li = document.createElement("li");
         li.innerHTML = (i + 1) + " . " + responseStr.neighbors[i].name;
+    
         ul.append(li);
     }
 
