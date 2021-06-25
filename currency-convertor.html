@@ -1,0 +1,196 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exchange Rate Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Open+Sans&family=Playfair+Display+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/currency-convertor.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+    <div class="columns is-multiline is-gapless">
+        <!--navbar-->
+        <div class="column is-9 navbar-brand is-gapless">
+            <!--logo and name-->
+            <!--<div class="columns is-gapless is-vcentered">-->
+            <div class="navbar-item is-size-3 has-text-weight-bold">
+                <i class="fas fa-plane-departure"></i>
+                <a href="./index.html" style = "color:white; text-decoration: none;">Destination Unknown</a>
+            </div>
+        </div>
+        <!--local time-->
+        <div class="column is-3  navbar-brand navbar-end is-gapless">
+            <div class="navbar-item is-size-5" id="clock"> Local Time: </div>
+        </div>
+
+        <!--hero -->
+        <div class="column is-full">
+            <div class="columns countries is-gapless">
+                <!--use id="country-name" to append country name-->
+                <div
+                    class="column has-text-primary-dark is-size-1 has-text-centered has-text-weight-semibold is-gapless">
+                    <h1 class="p-6">Exchange Rate Calculator </h1>
+                </div>
+            </div>
+        </div>
+        <!--calculator header-->
+        <div class="column is-full calculator-header is-size-4 has-text-centered  has-text-white has-background-link-light">
+            <p>Choose the currency and the amount to get the exchange rate</p>
+        </div>
+        <!--calculator-->
+        <div class="column is-4"></div>
+        <div class="column is-4 mt-5" id="currency-style">
+            <div class="columns is-gapless is-multiline">
+                <div class="column is-full px-5">
+                <div class="currency">
+                    <select name="" id="currency-one">
+                        <option value="AED">AED</option>
+                        <option value="ARS">ARS</option>
+                        <option value="AUD">AUD</option>
+                        <option value="BGN">BGN</option>
+                        <option value="BRL">BRL</option>
+                        <option value="BSD">BSD</option>
+                        <option value="CAD">CAD</option>
+                        <option value="CHF">CHF</option>
+                        <option value="CLP">CLP</option>
+                        <option value="CNY">CNY</option>
+                        <option value="COP">COP</option>
+                        <option value="CZK">CZK</option>
+                        <option value="DKK">DKK</option>
+                        <option value="DOP">DOP</option>
+                        <option value="EGP">EGP</option>
+                        <option value="EUR">EUR</option>
+                        <option value="FJD">FJD</option>
+                        <option value="GBP">GBP</option>
+                        <option value="GTQ">GTQ</option>
+                        <option value="HKD">HKD</option>
+                        <option value="HRK">HRK</option>
+                        <option value="HUF">HUF</option>
+                        <option value="IDR">IDR</option>
+                        <option value="ILS">ILS</option>
+                        <option value="INR">INR</option>
+                        <option value="ISK">ISK</option>
+                        <option value="JPY">JPY</option>
+                        <option value="KRW">KRW</option>
+                        <option value="KZT">KZT</option>
+                        <option value="MXN">MXN</option>
+                        <option value="MYR">MYR</option>
+                        <option value="NOK">NOK</option>
+                        <option value="NZD">NZD</option>
+                        <option value="PAB">PAB</option>
+                        <option value="PEN">PEN</option>
+                        <option value="PHP">PHP</option>
+                        <option value="PKR">PKR</option>
+                        <option value="PLN">PLN</option>
+                        <option value="PYG">PYG</option>
+                        <option value="RON">RON</option>
+                        <option value="RUB">RUB</option>
+                        <option value="SAR">SAR</option>
+                        <option value="SEK">SEK</option>
+                        <option value="SGD">SGD</option>
+                        <option value="THB">THB</option>
+                        <option value="TRY">TRY</option>
+                        <option value="TWD">TWD</option>
+                        <option value="UAH">UAH</option>
+                        <option value="USD" selected>USD</option>
+                        <option value="UYU">UYU</option>
+                        <option value="VND">VND</option>
+                        <option value="ZAR">ZAR</option>
+                      </select>
+                      <input type="number" name="" id="amount-one" placeholder="0" value=1>
+                   
+                </div>
+            </div>
+            <div class="column is-full px-5">
+                <div class="swap-rate-container">
+                <button class="btn button is-warning" id="swap">Swap</button>
+                <div class="rate has-text-white is-size-5 has-text-weight-medium has-background-warning-dark" id="rate"></div>
+                </div>
+            </div>
+                
+            <div class="column is-full px-5">
+                <div class="currency">
+                    <select name="" id="currency-two">
+                        <option value="AED">AED</option>
+                        <option value="ARS">ARS</option>
+                        <option value="AUD">AUD</option>
+                        <option value="BGN">BGN</option>
+                        <option value="BRL">BRL</option>
+                        <option value="BSD">BSD</option>
+                        <option value="CAD">CAD</option>
+                        <option value="CHF">CHF</option>
+                        <option value="CLP">CLP</option>
+                        <option value="CNY">CNY</option>
+                        <option value="COP">COP</option>
+                        <option value="CZK">CZK</option>
+                        <option value="DKK">DKK</option>
+                        <option value="DOP">DOP</option>
+                        <option value="EGP">EGP</option>
+                        <option value="EUR"selected>EUR</option>
+                        <option value="FJD">FJD</option>
+                        <option value="GBP">GBP</option>
+                        <option value="GTQ">GTQ</option>
+                        <option value="HKD">HKD</option>
+                        <option value="HRK">HRK</option>
+                        <option value="HUF">HUF</option>
+                        <option value="IDR">IDR</option>
+                        <option value="ILS">ILS</option>
+                        <option value="INR">INR</option>
+                        <option value="ISK">ISK</option>
+                        <option value="JPY">JPY</option>
+                        <option value="KRW">KRW</option>
+                        <option value="KZT">KZT</option>
+                        <option value="MXN">MXN</option>
+                        <option value="MYR">MYR</option>
+                        <option value="NOK">NOK</option>
+                        <option value="NZD">NZD</option>
+                        <option value="PAB">PAB</option>
+                        <option value="PEN">PEN</option>
+                        <option value="PHP">PHP</option>
+                        <option value="PKR">PKR</option>
+                        <option value="PLN">PLN</option>
+                        <option value="PYG">PYG</option>
+                        <option value="RON">RON</option>
+                        <option value="RUB">RUB</option>
+                        <option value="SAR">SAR</option>
+                        <option value="SEK">SEK</option>
+                        <option value="SGD">SGD</option>
+                        <option value="THB">THB</option>
+                        <option value="TRY">TRY</option>
+                        <option value="TWD">TWD</option>
+                        <option value="UAH">UAH</option>
+                        <option value="USD">USD</option>
+                        <option value="UYU">UYU</option>
+                        <option value="VND">VND</option>
+                        <option value="ZAR">ZAR</option>
+                      </select>
+                      <input type="number" name="" id="amount-two" placeholder="0" >
+                   
+                </div>
+            </div>
+        </div>
+        </div>
+        <!--Footer-->
+        <div class="column is-full">
+            <footer class="footer-info-2 columns footer">
+                <div class="column is-full is-size-6 has-text-weight-semibold contact has-text-centered">
+                    Connect with us
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-google"></a>
+                    <a href="#" class="fa fa-youtube"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                </div>
+            </footer>
+        </div>
+</div>
+
+   
+    
+    <script src="https://kit.fontawesome.com/542d56e2f0.js" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/currency-convertor.js"></script>
+</body>
+</html>

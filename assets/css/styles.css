@@ -1,0 +1,352 @@
+* {
+  padding:0;
+  margin:0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color:whitesmoke;
+  padding:0;
+  margin: 0;
+}
+/*SECTION 1 Navbar for name and local time
+---- shows on the page ones loaded*/
+.navbar-brand {
+  display: flex;
+  background-image: linear-gradient(rgba(80, 51, 13, 0.6), rgba(0, 0, 0, 0.5)), url("../images/hero-bg.jpg"); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-position: 80%;
+  z-index: 9999;
+  border:none;
+}
+
+.navbar-brand div span {
+  font-size: 1.9rem;
+}
+.navbar-item {
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  
+  
+}
+
+#clock {
+  background-color: rgb(233, 222, 222, 0.2); 
+  font-size: 1rem;
+}
+/*SECTION 2 Hero with input form and phrase
+---- shows on the page ones loaded*/
+.hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/hero-bg.jpg");  
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 80%;
+  
+}
+
+.form {
+  color: white;
+  background-color: rgba(51, 121, 124, 0.5);
+  padding: 20px;
+  border: solid 3px rgb(58, 58, 58);
+  margin-top: 4.5%;
+  margin-left: 15%;
+  margin-bottom: 4.5%;
+  margin-right: 3.5%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+}
+
+#departure-date {
+background-color: rgb(191, 204, 206);
+}
+
+#return-date {
+  background-color: rgb(191, 204, 206);
+}
+
+
+.hero-text {
+  font-family:'Caveat', cursive;
+  color:rgb(238, 228, 142);
+  font-size: 4rem;
+  margin-top: 5.5%;
+  text-align: left;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  display:grid;
+}
+
+.is-size-5 {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.columns:last-child {
+  margin: 0;
+}
+​/*SECTION 3 Search info box tp show user info of the search parameters         
+---- should appear after button clicked    
+---- can be done with stule change from display: none to display:grid on click*/
+#search-info-box {
+display:grid; 
+}
+
+.search-info {
+  background: linear-gradient(90deg,rgb(156, 163, 163) 0%, rgb(48, 58, 82) 50%, rgb(29, 43, 56) 100%);
+  color: black;
+  display:grid;    
+}
+
+.btn-hover {
+position: relative;
+display: inline-block;
+}
+
+.btn-hover .hover-text {
+visibility: hidden;
+width: 150px;
+background-color: darkgrey;
+  color: black;
+text-align: center;
+border-radius: 5px;
+padding: 5px 0;
+margin-top: 15px;
+margin-left: 12px;
+position: absolute;
+z-index: 1;
+}
+
+.btn-hover:hover .hover-text {
+visibility: visible;
+}
+
+
+
+
+/*SECTION 4 Serch results box with table of results content                    
+---- should appear after button clicked 
+---- can be done with stule change from display: none to display:grid on click*/
+.results {
+  background-color: rgba(75, 191, 195, 0.1);
+  color: black;
+}
+
+.results h2 {
+  color:black;
+ 
+}
+
+#flight-display ul li {
+  border-right: solid 1px rgb(58, 58, 58, 0.5);
+  color:black
+}
+
+
+/*SECTION 5 Saved Countries*/
+#saved-countries{
+  height: 200px;
+  margin: 20px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: center;
+  
+}
+
+.previousSearch{
+flex-grow: 1;
+
+}
+
+.previousSearch{
+flex-grow: 1;
+
+}
+
+/*Footer*/
+
+main {
+  min-height: calc(100vh - 70px);
+}
+.footer-info {
+  background: linear-gradient(90deg,rgb(41, 42, 42) 0%, rgba(51, 121, 124) 100%);
+  color:white;
+ left: 0;
+ bottom: 0;
+ width: 100%;
+ margin-top: -50px;
+ position: fixed;
+}
+.footer {
+  padding: 15px;
+}
+
+.contact {
+  text-align: right;
+}
+.fa {
+  padding: 10px;
+  font-size: 10px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 5px;
+}
+.fa:hover {
+  opacity: 0.7;
+}
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+/*HTML 2*/
+.footer-info-2 {
+  background: linear-gradient(90deg,rgb(41, 42, 42) 0%, rgba(51, 121, 124) 100%);
+  color:white;
+ left: 0;
+ bottom: 0;
+ width: 100%;
+ margin-top: -50px;
+ position: fixed;
+}
+.countries {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/hero-bg.jpg");  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 80%; 
+}
+.countries h1 {
+  color:khaki;
+  font-weight: bolder;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.overview {
+  background:linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(112, 162, 243) 100%);
+    display: none;
+    padding-left: 3rem;
+}
+
+.overview p {
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+img {
+  max-width: 70%;
+  max-height: 70%;
+}
+
+.advice {
+  background:linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(235, 212, 81) 100%);
+  display: none;
+  padding-left: 3rem;
+}
+
+.neighbours {
+  background:linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(141, 231, 132) 100%);
+  display:none;
+  padding-left: 3rem;
+}
+
+.neighbours ul li {
+  padding: 0.5rem;
+  font-weight: bold;
+  border-bottom: solid 1px rgb(58, 58, 58, 0.5);
+}
+
+.weather {
+  background:linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(137, 230, 230) 100%);
+  display:none;
+  padding-left: 3rem;
+}
+
+.opt-menu {
+  background: linear-gradient(90deg,rgb(242, 251, 251) 0%, rgb(123, 126, 126) 100%);
+}
+
+
+/* MEDIA QUERY FOR SMALLER DESKTOP SCREENS AND SMALLER */
+@media screen and (max-width: 980px) {
+ /* .navbar-brand {
+      justify-content: center;
+      position: relative;
+}
+
+.navbar-brand h1 span {
+      width: 100%;
+      text-align: center;    
+}
+
+.navbar-end {
+  margin-top: 20px;
+  width: 100%;
+  justify-content: center;
+}
+*/
+}
+
+/* MEDIA QUERY FOR TABLETS AND SMALLER */
+@media screen and (max-width: 768px) {
+
+}
+
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+.form {
+  border: solid 1px rgb(58, 58, 58);
+  margin-left: 4.5%;
+  margin-right: 4.5%;
+}
+
+.hero-text {
+  font-size: 2rem;
+  margin-top: 0.5%;
+}
+
+.heading-returning {
+font-size: 1rem;
+}
+
+#currency {
+padding: 3px;
+}
+.countries h1{
+      font-size: 32px;
+  }
+}
+
+#clear-btn{
+    width: 100%;
+}
+
+.is-black{
+    width:100%;
+}
