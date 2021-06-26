@@ -114,8 +114,7 @@ var selectCountry = function (event) {
     }
     console.log(btnTargetHistory);
     countryOfTravel = btnTargetHistory;
-    // debugger;
-    //fetchTravelApi(); 
+    ; 
 
     localStorage.setItem("selected-country", countryOfTravel);
     linkInfoPage();
@@ -139,7 +138,11 @@ display_c5()
 clearBtn.addEventListener('click',function(event){
     event.preventDefault();
     console.log(event);
-    searchResultsBox.innerHTML = " ";
+    pricing.innerHTML = " ";
+    airlines.innerHTML = " ";
+    destination.innerHTML = " ";
+    dates.innerHTML = " ";
+    //searchResultsBox.textContent = " ";
 
 })
 
@@ -373,7 +376,7 @@ var tripDates = function () {
 
         var dateli = document.createElement("li");
         dates.append(dateli);
-        dateli.setAttribute("style", "height: 150px")
+        dateli.setAttribute("style", "height: 200px")
         dateli.innerHTML = "Departure: " + dateOfDeparture + "<br/> Return: " + dateOfReturn;
     }
 }
@@ -412,7 +415,7 @@ var tripLocation = function () {
         }
         var destinationli = document.createElement("li");
         destination.append(destinationli);
-        destinationli.setAttribute("style", "height: 150px");
+        destinationli.setAttribute("style", "height: 200px");
         destinationli.innerHTML = "From: " + departurePointOut + " / " + departureCountryOut + "<br/> To: " + travelDestinationOut + " / " + travelCountryOut;
 
     }
@@ -434,7 +437,7 @@ var flightCarriers = function () {
                     airlineNameOut = carriers[n].Name
                     console.log(airlineNameOut + " Carrier Name ")
                     var airlinesli = document.createElement("li");
-                    airlinesli.setAttribute("style", "height: 150px")
+                    airlinesli.setAttribute("style", "height: 200px")
                     airlines.append(airlinesli);
                     airlinesli.innerHTML = airlineNameOut + "<br/>"
                 }
@@ -452,7 +455,7 @@ var flightCarriers = function () {
                     console.log(airlineNameIn + " Carrier Name In")
 
                     var airlinesli = document.createElement("li");
-                    airlinesli.setAttribute("style", "height: 150px")
+                    airlinesli.setAttribute("style", "height: 200px")
                     airlines.append(airlinesli);
                     airlinesli.innerHTML = airlineNameOut + "/<br/>" + airlineNameIn;
                 }
@@ -468,7 +471,7 @@ var pricingInformation = function () {
         console.log(price + " min price ");
         var priceli = document.createElement("li")
         pricing.append(priceli);
-        priceli.setAttribute("style", "height: 150px")
+        priceli.setAttribute("style", "height: 200px")
         priceli.innerHTML = "$ " + price + " <br/>";
 
         var priceBtn = document.createElement("button")
