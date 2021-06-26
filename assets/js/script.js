@@ -142,13 +142,7 @@ clearBtn.addEventListener('click',function(event){
     airlines.innerHTML = " ";
     destination.innerHTML = " ";
     dates.innerHTML = " ";
-    //searchResultsBox.textContent = " ";
-
 })
-
-
-
-
 
 // listen to submit button on form
 formSubmit.addEventListener('click', function (event) {
@@ -169,40 +163,32 @@ formSubmit.addEventListener('click', function (event) {
     //grab departureDate from calendar on form
     var departureDate = document.querySelector("#departure-date").value;
     //formating date to YYYY/MM/DD
-    console.log(departureDate);
     var departureDateFormat = moment(departureDate).format("YYYY/MM/DD");
     console.log(departureDateFormat + " selected departure date");
 
     //format departureDate for checking for valid date
     departureDateYear = departureDate.split("-")[0]
     var departureDateYearInt = parseInt(departureDateYear);
-    console.log("departure year is: " + departureDateYearInt );
 
     //grab month of departureDate
     departureDateMonth = departureDate.split("-")[1];
     var departureDateMonthInt = parseInt(departureDateMonth);
-    console.log("departure month is: " + departureDateMonthInt);
 
     //grab day of departureDate
     departureDateDay = departureDate.split("-")[2];
     var departureDateDayInt = parseInt(departureDateDay);
-    console.log("departure day is : " + departureDateDayInt);
     
     //get current date for comparison
     currentDate = new Date()
-    console.log(currentDate);
 
     //grab month of currentDate
     currentMonth =currentDate.getMonth()+1
-    console.log("current month is: "+ currentMonth);
 
     //grab year of currentYear
     currentYear = currentDate.getFullYear();
-    console.log("current year is: " + currentYear);
 
     //grab day of currentYear
     currentDay = currentDate.getDate();
-    console.log("current day is: " + currentDay);
 
     //confirm departure date is valid(error handling)
     if(currentYear < departureDateYearInt){
@@ -246,17 +232,14 @@ formSubmit.addEventListener('click', function (event) {
     //grab year of ReturnDate
     returnDateYear = returnDate.split("-")[0]
     var returnDateYearInt = parseInt(returnDateYear);
-    console.log("return year is: " + returnDateYearInt );
-
+    
     //grab month of returnDate
     returnDateMonth = returnDate.split("-")[1];
     var returnDateMonthInt = parseInt(returnDateMonth);
-    console.log("return month is: " + returnDateMonthInt);
 
     //grab day of ReturnDate
     returnDateDay = returnDate.split("-")[2];
     var returnDateDayInt = parseInt(returnDateDay);
-    console.log("return day is : " + returnDateDayInt);
 
     //confirm return date is after departure date
     //if return date is next year
@@ -363,13 +346,10 @@ formSubmit.addEventListener('click', function (event) {
 
 var tripDates = function () {
     for (var d = 0; d < limitedQuotes.length; d++) {
-        //dateOfDeparture[q]
         dateOfDeparture = limitedQuotes[d].OutboundLeg.DepartureDate
         console.log(dateOfDeparture);
         dateOfDeparture = dateOfDeparture.split("T")[0];
-        console.log(dateOfDeparture + ": Departure Date ");
 
-        //dateOfReturn[q]
         dateOfReturn = limitedQuotes[d].InboundLeg.DepartureDate
         dateOfReturn = dateOfReturn.split("T")[0];
         console.log(dateOfReturn + ": Return Date ");
@@ -388,11 +368,9 @@ var tripLocation = function () {
 
         //destination id outbound
         destinationId = limitedQuotes[l].OutboundLeg.DestinationId;
-        console.log(destinationId + ": Destination ID ");
 
         //origin id outbound
         originId = limitedQuotes[l].OutboundLeg.OriginId
-        console.log(originId + ": Origin ID ");
 
 
         //convert destination id and origin id into names
@@ -466,7 +444,6 @@ var flightCarriers = function () {
 
 var pricingInformation = function () {
     for (var q = 0; q < limitedQuotes.length; q++) {
-        //price[q]
         price = limitedQuotes[q].MinPrice
         console.log(price + " min price ");
         var priceli = document.createElement("li")
@@ -489,12 +466,10 @@ var addEventListenertoSelect = function () {
     for (var e = 0; e < allSelectBtns.length; e++) {
         allSelectBtns[e].addEventListener("click", countryChoice)
     }
-    console.log(allSelectBtns);
-
 }
 
 var countryChoice = function (event) {
-    console.log(event)
+    
     //target event
     var btnTarget = event.target.attributes[1].value;
     btnTarget = btnTarget.split("-")[1];
@@ -534,8 +509,6 @@ var countryChoice = function (event) {
         storageObject.push(countryOfTravel);
         console.log(storageObject);
         localStorage.setItem('storageObject', JSON.stringify(storageObject));
-
-
     }
 
 
