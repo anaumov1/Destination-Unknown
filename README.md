@@ -1,4 +1,5 @@
 # DESTINATION UNKNOWN
+# Contributions by: Alex Naumov, Adam McCoy, Jessica Sheleg and Fizza
 
 ## Description: 
     A travel site that provides flights based only off of your dates of travel and your home airport. Once a flight is selected then information on the country of the flight would be provided such as the flag, surrounding countries, weather and vaccination requirements to determine if that is a trip you would like to take. The user can refer back to past country searches by clicking on the history button. There they will find the previous information as well as a currency calculator to use while in the country to determine how much things actually cost in the home countries currency. 
@@ -47,7 +48,7 @@
 ![LandingPage](https://github.com/anaumov1/api-project/blob/develop/assets/images/Landingpg.JPG)
 ![FlightSearch](https://github.com/anaumov1/api-project/blob/develop/assets/images/FlightSearch.JPG)
 ![PastSearchButtons](https://github.com/anaumov1/api-project/blob/develop/assets/images/PastSearchBtns.JPG)
-![Overview]()
-![Neighbors]()
-![TravelAdvice]()
-![Weather]()
+![Overview](https://github.com/anaumov1/api-project/blob/main/assets/images/Overview.JPG)
+![Neighbors](https://github.com/anaumov1/api-project/blob/main/assets/images/Neighbors.JPG)
+![TravelAdvice](https://github.com/anaumov1/api-project/blob/main/assets/images/TravelAdvice.JPG)
+![Weather](https://github.com/anaumov1/api-project/blob/main/assets/images/Weather.JPG)
