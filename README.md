@@ -1,5 +1,5 @@
 # DESTINATION UNKNOWN
-# Contributions by: Alex Naumov, Adam McCoy, Jessica Sheleg and Fizza
+# Contributions by: Alex Naumov, Adam McCoy, Jessica Sheleg and Fizza Zaidi
 
 ## Description: 
     A travel site that provides flights based only off of your dates of travel and your home airport. Once a flight is selected then information on the country of the flight would be provided such as the flag, surrounding countries, weather and vaccination requirements to determine if that is a trip you would like to take. The user can refer back to past country searches by clicking on the history button. There they will find the previous information as well as a currency calculator to use while in the country to determine how much things actually cost in the home countries currency. 
