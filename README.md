@@ -41,7 +41,7 @@
 
 ## Links:
 * GitHub Repository: https://github.com/anaumov1/api-project
-* Travel with us:  https://anaumov1.github.io/api-project/
+* Travel with us:  https://anaumov1.github.io/Destination-Unknown/
 
 ## Photos:
 
